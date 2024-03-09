@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/select"
 
 const Navbar = () => {
-  
+
 
   return (
     <nav className='sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all'>
@@ -40,8 +40,15 @@ const Navbar = () => {
           {/* <MobileNav isAuth={!!user} /> */}
 
           <div className='hidden items-center space-x-4 sm:flex'>
-           
-            
+            <Link
+              href='/files'
+              className={buttonVariants({
+                variant: 'ghost',
+                size: 'sm',
+              })}>
+              Get Started
+            </Link>
+
           </div>
         </div>
       </MaxWidthWrapper>

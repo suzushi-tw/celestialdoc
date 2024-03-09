@@ -27,7 +27,7 @@ function SideNave() {
 
     const [activeState, setActiveState] = useState(0);
     return (
-        <div className="shadow-sm border-r h-full">
+        <div className="shadow-sm border-r max-h-[calc(100vh-3.5rem-5rem)]">
             <div className="p-5 border-b">
                 {/* <Image src="/logo.svg" width={150} height={100} /> */}
             </div>

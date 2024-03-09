@@ -10,7 +10,7 @@ function layout({
 }) {
     return (
         <div>
-            <div className="h-full md:w-64 flex-col fixed inset-y-0 z-50 ">
+            <div className="max-h-[calc(100vh-3.5rem-10rem)] md:w-64 flex-col  inset-y-0 z-50 ">
                 <SideNave />
             </div>
             <div className="md:ml-64">
