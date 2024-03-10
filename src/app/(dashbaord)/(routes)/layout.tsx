@@ -9,16 +9,23 @@ function layout({
     children: React.ReactNode
 }) {
     return (
-        <div>
-            <div className="max-h-[calc(100vh-3.5rem-10rem)] md:w-64 flex-col  inset-y-0 z-50 ">
-                <SideNave />
-            </div>
-            <div className="md:ml-64">
-                <TopHeader />
-                {children}
-            </div>
+        // <div>
+        //     <div className="flex-col  inset-y-0 z-50 ">
+        //         <SideNave />    
+        //     </div>
+        //     <div className="">
+        //         {/* <TopHeader /> */}
+        //         {children}
+        //     </div>
 
+        // </div>
+        <main className="container mx-auto min-h-full">
+        <div className="flex gap-8">
+          <SideNave />
+  
+          <div className="w-full">{children}</div>
         </div>
+      </main>
     )
 }
 
