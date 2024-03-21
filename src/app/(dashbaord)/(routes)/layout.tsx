@@ -19,12 +19,15 @@ function layout({
         //     </div>
 
         // </div>
-        <main className="container mx-auto min-h-full">
-        <div className="flex gap-8">
-          <SideNave />
+      //   <main className="container mx-auto min-h-full">
+      //   <div className="flex gap-8">
+      //     <SideNave />
   
-          <div className="w-full">{children}</div>
-        </div>
+      //     <div className="w-full">{children}</div>
+      //   </div>
+      // </main>
+      <main>
+        {children}
       </main>
     )
 }
