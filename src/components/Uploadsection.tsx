@@ -7,6 +7,7 @@ import { useDropzone } from 'react-dropzone'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-hot-toast'
 import { uploadToS3 } from '@/lib/s3'
+import axios from 'axios'
 
 function Uploadsection() {
 
@@ -33,7 +34,14 @@ function Uploadsection() {
                 const metadata = {
                     contentType: file.type,
                 }
-                uploadToS3(acceptedFiles[0]);
+                const data = await uploadToS3(acceptedFiles[0]);
+
+                const response = await axios.post("/api/upload", {
+                    file_key: data.file_key,
+                    file_name: data.file_name,
+                });
+                return response.data;
+
 
                 // router.push(`/chat/${chatId}`)
             } catch (err) {
