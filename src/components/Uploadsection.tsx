@@ -6,8 +6,7 @@ import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-hot-toast'
-import { getStorage, ref, uploadBytesResumable } from "firebase/storage";
-import { storage } from '../../../../firebase.config'
+import { uploadToS3 } from '@/lib/s3'
 
 function Uploadsection() {
 
@@ -34,28 +33,7 @@ function Uploadsection() {
                 const metadata = {
                     contentType: file.type,
                 }
-                const spaceRef = ref(storage, 'file-upload/' + file?.name)
-                const uploadTask = uploadBytesResumable(spaceRef, file);
-                // // const fileKey = await uploadToS3(acceptedFiles[0])
-                // toast.success('File uploaded successfully!')
-
-                // setIsCreatingChat(true)
-                // // const chatId = await createChat(fileKey)
-                // toast.success('Chat created successfully!')
-                uploadTask.on('state_changed',
-                    (snapshot) => {
-                        // Handle the upload progress
-                    },
-                    (error) => {
-                        // Handle unsuccessful uploads
-                        toast.error('Upload failed ...')
-                        console.log(error)
-                    },
-                    () => {
-                        // Handle successful uploads on complete
-                        toast.success('File uploaded successfully!')
-                    }
-                );
+                uploadToS3(acceptedFiles[0]);
 
                 // router.push(`/chat/${chatId}`)
             } catch (err) {
@@ -69,7 +47,7 @@ function Uploadsection() {
     })
     return (
         <div>
-            <div className="p-2 bg-white rounded-2xl">
+            <div className="p-2 bg-white rounded-2xl w-full">
                 <div
                     {...getRootProps({
                         className:

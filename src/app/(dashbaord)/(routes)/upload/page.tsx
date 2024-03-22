@@ -1,5 +1,5 @@
 import React from "react";
-import Uploadsection from "../../components/Uploadsection";
+import Uploadsection from "../../../../components/Uploadsection";
 import Filepreview from "../../components/Filepreview";
 
 export default function Upload() {
