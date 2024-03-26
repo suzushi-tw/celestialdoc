@@ -26,7 +26,7 @@ const Navbar = () => {
               <UserButton />
             ) : (
               <Link
-                href='/files'
+                href='/dashboard'
                 className={buttonVariants({
                   variant: 'ghost',
                   size: 'sm',
