@@ -8,8 +8,8 @@ export function cn(...inputs: ClassValue[]) {
 
 
 export function constructMetadata({
-  title = "CelestialPDF",
-  description = "Boost Productivity with AI, let AI summarize documents with detail analysis. Just like a little assistant that can explain everything including complex topic!",
+  title = "CelestialDOC",
+  description = "An open source google drive/docend alternative !",
   image = "/thumbnail.png",
   icons = "/favicon.ico",
   noIndex = false
@@ -40,7 +40,7 @@ export function constructMetadata({
       creator: "@Ian"
     },
     icons,
-    metadataBase: new URL('https://stellar-celestialpdf.com/'),
+    metadataBase: new URL('https://celestialdoc.com/'),
     
     ...(noIndex && {
       robots: {
