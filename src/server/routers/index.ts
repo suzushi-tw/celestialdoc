@@ -4,7 +4,7 @@ import { useUser } from '@clerk/nextjs';
 import db from '@/lib/db/index'
 import { users } from '@/lib/db/schema';
 import { PrismaClient } from '@prisma/client'
-
+import { z } from 'zod';
 
 const prisma = new PrismaClient();
 
@@ -34,7 +34,7 @@ export const protectedRouter = router({
             });
 
             // Assuming you want to insert a new user if not found
-            if (!userRecord && user.primaryEmailAddress!=null) {
+            if (!userRecord && user.primaryEmailAddress != null) {
                 await prisma.user.create({
                     data: {
                         id: user.id,
@@ -43,5 +43,30 @@ export const protectedRouter = router({
                 });
             }
         }
-    })
+    }),
+
+    getFile: protectedProcedure
+        .input(z.object({ key: z.string() }))
+        .mutation(async ({ ctx, input }) => {
+            const { user } = useUser();
+            let userid="";
+            if(user){
+                userid = user.id;
+            }
+            const file = await prisma.file.findFirst({
+                where: {
+                    key: input.key,
+                    userId: userid,
+                },
+            })
+
+            if (!file) throw new TRPCError({ code: 'NOT_FOUND' })
+
+            return file
+        }),
+
+
 })
+
+export type AppRouter = typeof protectedRouter
+

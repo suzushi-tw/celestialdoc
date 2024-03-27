@@ -7,6 +7,7 @@ import { useDropzone } from 'react-dropzone'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-hot-toast'
 import { uploadToS3 } from '@/lib/s3'
+import { trpc } from '@/utils/trpc'
 import axios from 'axios'
 
 function Uploadsection() {
@@ -15,6 +16,19 @@ function Uploadsection() {
     const [isCreatingChat, setIsCreatingChat] = useState(false)
     const router = useRouter()
     // const storage = getStorage(app)
+
+    const { mutate: startPolling } = trpc.getFile.useMutation(
+        {
+            onSuccess: (file) => {
+                router.push(`/dashboard/${file.id}`)
+            },
+            retry: true,
+            retryDelay: 500,
+        }
+    )
+
+    
+
 
 
     const { getRootProps, getInputProps } = useDropzone({
@@ -40,9 +54,9 @@ function Uploadsection() {
                     file_key: data.file_key,
                     file_name: data.file_name,
                 });
-                return response.data;
 
 
+                startPolling({ key: data.file_key });
                 // router.push(`/chat/${chatId}`)
             } catch (err) {
                 toast.error('Something went wrong ...')
