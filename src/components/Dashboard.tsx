@@ -1,6 +1,5 @@
 'use client'
 
-
 import {
     Car,
     Ghost,
@@ -9,7 +8,7 @@ import {
     Plus,
     Trash,
 } from 'lucide-react'
-
+import { trpc } from '@/app/_trpc/client'
 import Link from 'next/link'
 
 import { Button } from './ui/button'
@@ -62,16 +61,42 @@ import {
     StarIcon, TrashIcon
 } from "lucide-react"
 import Uploadsection from './Uploadsection'
-
-
-
-
+import { useUser } from '@clerk/clerk-react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useRef } from 'react';
 
 const Dashboard = () => {
 
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const origin = searchParams.get('origin');
+
+    const retry = useRef(0);
+    const maxRetryCount = 5;
 
 
-
+    const { refetch } = trpc.authCallback.useQuery(undefined, {
+        onSuccess: ({ success }) => {
+            if (success) {
+                router.push(origin ? `/${origin}` : "/dashboard");
+            }
+        },
+        onError: (err) => {
+            console.log(err);
+            if (err.data?.code === "UNAUTHORIZED") {
+                retry.current = retry.current + 1;
+                if (retry.current <= maxRetryCount) {
+                    setTimeout(() => {
+                        refetch();
+                    }, 500);
+                } else {
+                    router.push("/sign-in");
+                }
+            }
+        },
+        retry: false,
+        retryDelay: 500,
+    });
 
     const [isCollapsed, setIsCollapsed] = React.useState(false)
 

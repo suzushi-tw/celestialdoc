@@ -1,5 +1,4 @@
 import { NextResponse, NextRequest } from "next/server";
-import { useUser } from '@clerk/nextjs';
 // import { db } from '@/db'
 // import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
 // import { PDFLoader } from 'langchain/document_loaders/fs/pdf'
@@ -27,13 +26,13 @@ const client = new S3Client({
 
 
 export async function POST(req: Request, res: Response) {
-    const { user } = useUser();
+
     if (req.method === 'POST') {
 
 
 
         const body = await req.json();
-        const { file_key, file_name } = body;
+        const { file_key, file_name, userid } = body;
         console.log(file_key, file_name);
 
 
@@ -54,24 +53,24 @@ export async function POST(req: Request, res: Response) {
 
             if (isFileExist) return
 
-            if (user != null) {
-                const createdFile = await prisma.file.create({
-                    data: {
-                        key: file.key,
-                        name: file.name,
-                        userId: user.id,
-                        url: file.url,
-                        uploadStatus: 'PROCESSING',
-                    },
-                })
 
-                return NextResponse.json(
-                    {
-                        success: "file created successfully"
-                    },
-                    { status: 200 }
-                );
-            }
+            const createdFile = await prisma.file.create({
+                data: {
+                    key: file.key,
+                    name: file.name,
+                    userId: userid,
+                    url: file.url,
+                    uploadStatus: 'PROCESSING',
+                },
+            })
+
+            return NextResponse.json(
+                {
+                    success: "file created successfully"
+                },
+                { status: 200 }
+            );
+
 
 
 

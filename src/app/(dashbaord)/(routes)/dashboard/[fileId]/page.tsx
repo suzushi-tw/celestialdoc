@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/resizable"
 import { useUser } from '@clerk/nextjs';
 import { PrismaClient } from '@prisma/client'
+import { auth } from '@clerk/nextjs'
 
 const prisma = new PrismaClient();
 
@@ -36,24 +37,20 @@ interface PageProps {
 
 const Page = async ({ params }: PageProps) => {
     const { fileId } = params
-
-    const { user } = useUser();
-    if (!user) {
-        return;
-    }
-    const userid = user.id
+    const { userId } = auth();
+   
     const file = await prisma.file.findFirst({
         where: {
             id: fileId,
-            userId: user.id,
+            userId: userId,
         },
     })
-    if(!file){
+    if (!file) {
         return;
     }
 
     return (
-        <div className='flex-1 justify-between flex flex-col h-[calc(100vh-3.5rem)]'>
+        <div className='flex-1 justify-between flex flex-col max-h-[calc(100vh-3.5rem-10rem)]'>
             <div className='mx-auto w-full max-w-8xl grow lg:flex xl:px-2'>
                 {/* Left sidebar & main wrapper */}
                 <div className='flex-1 xl:flex'>

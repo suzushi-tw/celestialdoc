@@ -7,8 +7,9 @@ import { useDropzone } from 'react-dropzone'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-hot-toast'
 import { uploadToS3 } from '@/lib/s3'
-import { trpc } from '@/utils/trpc'
+import { trpc } from '@/app/_trpc/client'
 import axios from 'axios'
+import { useUser } from '@clerk/nextjs';
 
 function Uploadsection() {
 
@@ -16,6 +17,7 @@ function Uploadsection() {
     const [isCreatingChat, setIsCreatingChat] = useState(false)
     const router = useRouter()
     // const storage = getStorage(app)
+    const { user } = useUser();
 
     const { mutate: startPolling } = trpc.getFile.useMutation(
         {
@@ -27,7 +29,7 @@ function Uploadsection() {
         }
     )
 
-    
+
 
 
 
@@ -49,11 +51,14 @@ function Uploadsection() {
                     contentType: file.type,
                 }
                 const data = await uploadToS3(acceptedFiles[0]);
+                if (user) {
+                    const response = await axios.post("/api/upload", {
+                        file_key: data.file_key,
+                        file_name: data.file_name,
+                        userid: user.id,
+                    });
+                }
 
-                const response = await axios.post("/api/upload", {
-                    file_key: data.file_key,
-                    file_name: data.file_name,
-                });
 
 
                 startPolling({ key: data.file_key });

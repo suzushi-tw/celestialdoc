@@ -1,6 +1,6 @@
 import { TRPCError } from '@trpc/server';
 import { router, protectedProcedure } from '../trpc'
-import { useUser } from '@clerk/nextjs';
+import { useUser, auth, currentUser } from '@clerk/nextjs';
 import db from '@/lib/db/index'
 import { users } from '@/lib/db/schema';
 import { PrismaClient } from '@prisma/client'
@@ -9,48 +9,34 @@ import { z } from 'zod';
 const prisma = new PrismaClient();
 
 export const protectedRouter = router({
-    hello: protectedProcedure.query(({ ctx }) => {
-        return {
-            secret: `${ctx.auth?.userId} is using a protected procedure`
-        }
-    }),
+    authCallback: protectedProcedure.query(async () => {
+        const { userId } = auth();
+        if (!userId) throw new TRPCError({ code: "UNAUTHORIZED" });
 
-    authcallback: protectedProcedure.query(async ({ ctx }) => {
+        const dbUser = await prisma.user.findFirst({
+            where: {
+                id: userId,
+            },
+        });
 
-        const { user } = useUser();
-        let userRecord; // Declare userRecord here to avoid TS2448
-        if (user) {
-            const userid = user.id;
-            const userEmail = user.primaryEmailAddress;
-            if (!userid || !userEmail) {
-                throw new TRPCError({ code: "UNAUTHORIZED" });
-            }
+        if (!dbUser) {
 
-            // Corrected variable name from userId to userid
-            const dbUser = await prisma.user.findFirst({
-                where: {
-                    id: user.id,
+            await prisma.user.create({
+                data: {
+                    id: userId,
                 },
             });
-
-            // Assuming you want to insert a new user if not found
-            if (!userRecord && user.primaryEmailAddress != null) {
-                await prisma.user.create({
-                    data: {
-                        id: user.id,
-                        email: user.primaryEmailAddress.emailAddress,
-                    },
-                });
-            }
         }
+
+        return { success: true };
     }),
 
     getFile: protectedProcedure
         .input(z.object({ key: z.string() }))
         .mutation(async ({ ctx, input }) => {
             const { user } = useUser();
-            let userid="";
-            if(user){
+            let userid = "";
+            if (user) {
                 userid = user.id;
             }
             const file = await prisma.file.findFirst({
