@@ -58,7 +58,9 @@ import {
     BrainCircuit,
     LayoutDashboard,
     MessageCircle,
-    StarIcon, TrashIcon
+    StarIcon, TrashIcon,
+    Image,
+    SendIcon
 } from "lucide-react"
 import Uploadsection from './Uploadsection'
 import { useUser } from '@clerk/clerk-react'
@@ -124,6 +126,13 @@ const Dashboard = () => {
                                 href: "/files"
                             },
                             {
+                                title: "Gallery",
+                                label: "",
+                                icon: ImageIcon,
+                                variant: "ghost",
+                                href: "/gallery"
+                            },
+                            {
                                 title: "Favorite",
                                 label: "",
                                 icon: StarIcon,
@@ -131,11 +140,11 @@ const Dashboard = () => {
                                 href: "/multipdf"
                             },
                             {
-                                title: "Deleted",
+                                title: "Sent",
                                 label: "",
-                                icon: TrashIcon,
+                                icon: Send,
                                 variant: "ghost",
-                                href: "/mindmap"
+                                href: "/sent"
                             },
 
                         ]}

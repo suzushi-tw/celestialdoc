@@ -3,7 +3,7 @@ import { privateProcedure, publicProcedure, router } from './trpc';
 import { TRPCError } from '@trpc/server';
 
 import { z } from 'zod';
-
+import { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { absoluteUrl } from '@/lib/utils';
 
 import { PrismaClient } from '@prisma/client'
@@ -51,7 +51,7 @@ export const appRouter = router({
     .input(z.object({ key: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const { userId } = auth();
-      
+
       const file = await prisma.file.findFirst({
         where: {
           key: input.key,
@@ -65,6 +65,52 @@ export const appRouter = router({
     }),
 
 
+  deleteFile: privateProcedure
+    .input(z.object({ id: z.string(), key: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const { userId } = ctx
+
+      const file = await prisma.file.findFirst({
+        where: {
+          id: input.id,
+          userId,
+        },
+      })
+
+      if (!file) throw new TRPCError({ code: 'NOT_FOUND' })
+
+      await prisma.file.delete({
+        where: {
+          id: input.id,
+          key: input.key,
+        },
+      })
+
+
+      const client = new S3Client({
+        region: process.env.S3_UPLOAD_REGION,
+        credentials: {
+          secretAccessKey: process.env.S3_UPLOAD_SECRET || '',
+          accessKeyId: process.env.S3_UPLOAD_KEY || '',
+        },
+      });
+      try {
+        const deleteParams = {
+          Bucket: process.env.S3_UPLOAD_BUCKET,
+          Key: input.key,
+        };
+
+        await client.send(new DeleteObjectCommand(deleteParams));
+
+
+      } catch (error) {
+        console.error('Error deleting file:', error);
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR' })
+      }
+
+
+      return file
+    }),
 })
 
 
