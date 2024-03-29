@@ -21,6 +21,26 @@ export function DialogDemo() {
 
 
     const [isPasswordVisible, setPasswordVisible] = useState(false)
+
+    const [password, setPassword] = useState('')
+    const [isDownloadEnabled, setDownloadEnabled] = useState(false)
+    const [email, setEmail] = useState('')
+
+    const handleSubmit = async () => {
+        try {
+            const response = await axios.post('api/send', {
+                isPasswordVisible,
+                password,
+                isDownloadEnabled,
+                email,
+            })
+
+            // handle response here
+        } catch (error) {
+            // handle error here
+        }
+    }
+
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -64,7 +84,7 @@ export function DialogDemo() {
                 <div className="grid gap-4 py-4">
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="password" className="text-right">Enable password</Label>
-                        <Switch id="password" defaultChecked={false} onCheckedChange={setPasswordVisible}/>
+                        <Switch id="password" defaultChecked={false} onCheckedChange={setPasswordVisible} />
 
                     </div>
                     {isPasswordVisible && (
@@ -72,9 +92,16 @@ export function DialogDemo() {
                             <Label htmlFor="password" className="text-right">
                                 Password
                             </Label>
-                            <Input id="password" className="col-span-3" placeholder="password ..."/>
+                            <Input id="password" className="col-span-3" placeholder="password ..."
+                                value={password}
+                                onChange={(event) => setPassword(event.target.value)} />
                         </div>
                     )}
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="download" className="text-right">Download</Label>
+                        <Switch id="download" defaultChecked={false} onCheckedChange={setDownloadEnabled} />
+
+                    </div>
                     {/* <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="name" className="text-right">
                             Password
@@ -93,11 +120,13 @@ export function DialogDemo() {
                             id="username"
                             placeholder="email..."
                             className="col-span-3"
+                            value={email}
+                            onChange={(event) => setEmail(event.target.value)}
                         />
                     </div>
                 </div>
                 <DialogFooter>
-                    <Button type="submit">Send</Button>
+                    <Button type="submit" onClick={handleSubmit}>Send</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

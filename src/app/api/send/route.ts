@@ -4,15 +4,23 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
- 
+export async function POST(req: Request, res: Response) {
+  if (req.method === 'POST') {
 
+    const sender = process.env.Sender || 'resend.dev';
 
-  
+    const body = await req.json();
+    const { isPasswordVisible,
+      password,
+      isDownloadEnabled,
+      email, } = body;
+
     try {
+
+      
       const data = await resend.emails.send({
-        from: 'notification@celestialpdf.com',
-        to: [userEmail],
+        from: sender,
+        to: email,
         subject: 'Welcome to CelestialPDF',
         react: EmailTemplate({ firstName: username }, { steps: [], links: [] }),
       });
