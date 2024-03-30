@@ -147,7 +147,7 @@ const PdfRenderer = ({ url, fileId }: PdfRendererProps) => {
 
         <div className='space-x-2'>
 
-          <DialogDemo />
+          <DialogDemo fileId={fileId} url={url}/>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button

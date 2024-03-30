@@ -60,7 +60,6 @@ export async function POST(req: Request, res: Response) {
                     name: file.name,
                     userId: userid,
                     url: file.url,
-                    uploadStatus: 'PROCESSING',
                 },
             })
 

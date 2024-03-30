@@ -5,16 +5,21 @@ export default function Page() {
   return (
 
 
-    <div className="flex h-screen justify-center items-center">
-      <div className="hidden lg:flex items-center justify-center flex-1 bg-white text-black mx-auto">
-        <div className="max-w-md text-center">
-          <Image src="/fileupload.png" alt="signup" width={500} height={500} quality={100} />
-        </div>
-      </div>
-      <div className="w-full bg-gray-100 lg:w-1/2 flex items-center justify-center mx-auto">
-        <div className="max-w-md w-full p-6">
+    <div className="w-full min-h-[calc(100vh-3.5rem)] flex justify-center">
+      <div className="flex items-center justify-center py-12 w-1/2">
+        <div className="mx-auto grid w-[350px] gap-6">
           <SignUp />
         </div>
+      </div>
+      <div className="flex items-center justify-center py-12 w-1/2 ">
+        <Image
+          src="/fileupload.png"
+          alt="Image"
+          width={500}
+          height={500}
+          quality={100}
+          className="h-1/2 w-1/2 object-cover dark:brightness-[0.2] dark:grayscale hidden sm:block"
+        />
       </div>
     </div>
   );

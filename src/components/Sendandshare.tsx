@@ -16,10 +16,17 @@ import { Copy } from "lucide-react"
 import { Switch } from "./ui/switch"
 import { useState } from "react"
 import axios from "axios"
+import { useToast } from "./ui/use-toast"
 
-export function DialogDemo() {
+interface SendProps {
+    url: string
+    fileId: string
+}
 
 
+export function DialogDemo({ url, fileId }: SendProps) {
+
+    const { toast } = useToast();
     const [isPasswordVisible, setPasswordVisible] = useState(false)
 
     const [password, setPassword] = useState('')
@@ -27,12 +34,17 @@ export function DialogDemo() {
     const [email, setEmail] = useState('')
 
     const handleSubmit = async () => {
+        console.log("sending files")
+        toast({
+            description: "File has been sent !",
+        })
         try {
             const response = await axios.post('api/send', {
                 isPasswordVisible,
                 password,
                 isDownloadEnabled,
                 email,
+                url,
             })
 
             // handle response here
@@ -126,7 +138,7 @@ export function DialogDemo() {
                     </div>
                 </div>
                 <DialogFooter>
-                    <Button type="submit" onClick={handleSubmit}>Send</Button>
+                    <Button onClick={handleSubmit}>Send</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
