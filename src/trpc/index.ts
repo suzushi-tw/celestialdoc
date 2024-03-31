@@ -47,12 +47,41 @@ export const appRouter = router({
     })
   }),
 
+  
+  getUserAlbum: privateProcedure.query(async ({ ctx }) => {
+    const { userId } = ctx
+
+    return await prisma.album.findMany({
+      where: {
+        userId,
+      },
+    })
+  }),
+
+
   getFile: privateProcedure
     .input(z.object({ key: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const { userId } = auth();
 
       const file = await prisma.file.findFirst({
+        where: {
+          key: input.key,
+          userId: userId,
+        },
+      })
+
+      if (!file) throw new TRPCError({ code: 'NOT_FOUND' })
+
+      return file
+    }),
+
+  getAlbum: privateProcedure
+    .input(z.object({ key: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const { userId } = auth();
+
+      const file = await prisma.album.findFirst({
         where: {
           key: input.key,
           userId: userId,

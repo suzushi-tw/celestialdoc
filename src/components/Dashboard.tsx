@@ -66,6 +66,7 @@ import Uploadsection from './Uploadsection'
 import { useUser } from '@clerk/clerk-react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useRef } from 'react';
+import { BarListdashboard } from './dashboards/Fileoverview'
 
 const Dashboard = () => {
 
@@ -130,7 +131,7 @@ const Dashboard = () => {
                                 label: "",
                                 icon: ImageIcon,
                                 variant: "ghost",
-                                href: "/gallery"
+                                href: "/album"
                             },
                             {
                                 title: "Favorite",
@@ -152,7 +153,7 @@ const Dashboard = () => {
                 </ResizablePanel>
                 <ResizableHandle withHandle />
                 <ResizablePanel defaultSize={80}>
-                    <div className='max-w-6xl mt-3 mx-6 flex flex-col items-start justify-between gap-4 border-b border-gray-200 pb-5 sm:flex-row sm:items-center sm:gap-0'>
+                    <div className='max-w-6xl mt-3 mx-6 flex flex-col items-start justify-between gap-4 border-b border-gray-200 pb-3 sm:flex-row sm:items-center sm:gap-0'>
                         <h1 className='mb-3 font-bold text-lg text-gray-900 sm:text-5xl'>
                             Dashboard:
                         </h1>
@@ -161,14 +162,32 @@ const Dashboard = () => {
           Send email
         </Button> */}
                     </div>
-                    <div className='max-w-5xl h-60 mt-6 mx-auto flex flex-col w-full items-center justify-between gap-4 border-b border-gray-200 pb-5 sm:flex-row sm:items-center sm:gap-0'>
+                    <div className='max-w-5xl h-55 mt-2 mx-auto flex flex-col w-full items-center justify-between gap-2 border-b border-gray-200 pb-2 sm:flex-row sm:items-center sm:gap-0'>
                         <div className='w-full'>
                             <Uploadsection />
                         </div>
 
-                    </div>
-                    <div className='mt-8 mx-8 flex flex-col items-start justify-between gap-4 border-b border-gray-200 pb-5 sm:flex-row sm:items-center sm:gap-0'>
 
+                    </div>
+                    <div className='max-w-5xl  mt-2 mx-auto flex flex-col w-full items-center justify-between gap-2 border-b border-gray-200 pb-2 sm:flex-row sm:items-center sm:gap-0'>
+                        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7 w-full max-w-5xl">
+                            <Card className="col-span-4">
+                                <CardHeader>
+                                    <CardTitle>Last viewed</CardTitle>
+                                </CardHeader>
+                                <CardContent className="pl-2">
+
+                                </CardContent>
+                            </Card>
+                            <Card className="col-span-3">
+                                <CardHeader>
+                                    <CardTitle>Overview</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <BarListdashboard />
+                                </CardContent>
+                            </Card>
+                        </div>
                     </div>
                     {/* display all user files */}
 

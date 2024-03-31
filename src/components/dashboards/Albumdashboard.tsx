@@ -66,18 +66,21 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/TextLayer.css'
 import 'react-pdf/dist/Page/AnnotationLayer.css'
 import { toast } from '../ui/use-toast'
+import Image from 'next/image'
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 
 
-const Filesdashboard = () => {
+const Albumdashboard = () => {
     const [currentlyDeletingFile, setFile] = useState<string | null>(null);
 
     const utils = trpc.useContext();
 
     const [switchValue, setSwitchValue] = useState(false);
 
-    const { data: files, isLoading } = trpc.getUserFiles.useQuery();
+    const { data: files, isLoading } = trpc.getUserAlbum.useQuery();
+
+    
 
     const { mutate: deleteFile } = trpc.deleteFile.useMutation({
         onSuccess: () => {
@@ -119,14 +122,14 @@ const Filesdashboard = () => {
                                 title: "Files",
                                 label: "",
                                 icon: File,
-                                variant: "default",
+                                variant: "ghost",
                                 href: "/files"
                             },
                             {
                                 title: "Gallery",
                                 label: "",
                                 icon: ImageIcon,
-                                variant: "ghost",
+                                variant: "default",
                                 href: "/album"
                             },
                             {
@@ -190,49 +193,7 @@ const Filesdashboard = () => {
                                             <li
                                                 key={file.id}
                                                 className='col-span-1 divide-y  shadow transition hover:shadow-lg'>
-                                                {/* <Link
-                    href={`/dashboard/${file.id}`}
-                    className='flex flex-col gap-2'>
-                    <div className='pt-6 px-6 flex w-full items-center justify-between space-x-6'>
-                      <div className='h-10 w-10 flex-shrink-0 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500' />
-                      <div className='flex-1 truncate'>
-                        <div className='flex items-center space-x-3'>
-                          <h3 className='truncate text-lg font-medium text-zinc-900'>
-                            {file.name}
-                          </h3>
-                        </div>
-                      </div>
-                    </div>
-                  </Link> */}
 
-                                                {/* <div className='px-6 mt-4 grid grid-cols-3 place-items-center py-2 gap-6 text-xs text-zinc-500'>
-                    <div className='flex items-center gap-2'>
-                      <Plus className='h-4 w-4' />
-                      {format(
-                        new Date(file.createdAt),
-                        'MMM yyyy'
-                      )}
-                    </div>
-
-                    <div className='flex items-center gap-2'>
-                      <MessageSquare className='h-4 w-4' />
-                      mocked
-                    </div>
-
-                    <Button
-                      onClick={() =>
-                        deleteFile({ id: file.id, key: file.key })
-                      }
-                      size='sm'
-                      className='w-full'
-                      variant='destructive'>
-                      {currentlyDeletingFile === file.id ? (
-                        <Loader2 className='h-4 w-4 animate-spin' />
-                      ) : (
-                        <Trash className='h-4 w-4' />
-                      )}
-                    </Button>
-                  </div> */}
                                                 <Card className="w-full h-full">
                                                     <Link
                                                         href={`/dashboard/${file.id}`}
@@ -247,34 +208,7 @@ const Filesdashboard = () => {
                                                         </CardHeader>
                                                         <CardContent>
                                                             <div className=' flex items-center justify-center overflow-hidden h-[200px]'>
-                                                                {/* {file.name.endsWith('.docx') ? (
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-                                                                        <path fill="#2196f3" d="M37,45H11c-1.657,0-3-1.343-3-3V6c0-1.657,1.343-3,3-3h19l10,10v29C40,43.657,38.657,45,37,45z"></path>
-                                                                        <path fill="#bbdefb" d="M40 13L30 13 30 3z"></path>
-                                                                        <path fill="#1565c0" d="M30 13L40 23 40 13z"></path>
-                                                                        <path fill="#e3f2fd" d="M15 23H33V25H15zM15 27H33V29H15zM15 31H33V33H15zM15 35H25V37H15z"></path>
-                                                                    </svg>
-                                                                ) : file.name.endsWith('.pdf') ? (
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 512 512"><path fill="#e11d48" d="M64 464h48v48H64c-35.3 0-64-28.7-64-64V64C0 28.7 28.7 0 64 0h165.5c17 0 33.3 6.7 45.3 18.7l90.5 90.5c12 12 18.7 28.3 18.7 45.3V304h-48V160h-80c-17.7 0-32-14.3-32-32V48H64c-8.8 0-16 7.2-16 16v384c0 8.8 7.2 16 16 16m112-112h32c30.9 0 56 25.1 56 56s-25.1 56-56 56h-16v32c0 8.8-7.2 16-16 16s-16-7.2-16-16V368c0-8.8 7.2-16 16-16m32 80c13.3 0 24-10.7 24-24s-10.7-24-24-24h-16v48zm96-80h32c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48h-32c-8.8 0-16-7.2-16-16V368c0-8.8 7.2-16 16-16m32 128c8.8 0 16-7.2 16-16v-64c0-8.8-7.2-16-16-16h-16v96zm80-112c0-8.8 7.2-16 16-16h48c8.8 0 16 7.2 16 16s-7.2 16-16 16h-32v32h32c8.8 0 16 7.2 16 16s-7.2 16-16 16h-32v48c0 8.8-7.2 16-16 16s-16-7.2-16-16v-64z" /></svg>
-
-                                                                ) : null} */}
-                                                                <Document
-                                                                    file={file.url}
-                                                                    loading={
-                                                                        <div className='flex justify-center'>
-                                                                            <Loader2 className='my-24 h-6 w-6 animate-spin' />
-                                                                        </div>
-                                                                    }
-                                                                    onLoadError={() => {
-                                                                        toast({
-                                                                            title: 'Error loading PDF',
-                                                                            description: 'Please try again later',
-                                                                            variant: 'destructive',
-                                                                        })
-                                                                    }}
-                                                                >
-                                                                    <Page pageNumber={1} height={100} width={200} />
-                                                                </Document>
+                                                                <Image alt={file.name} width="200" height="100" src={file.url} />
                                                             </div>
                                                         </CardContent>
                                                     </Link>
@@ -333,4 +267,4 @@ const Filesdashboard = () => {
     )
 }
 
-export default Filesdashboard;
+export default Albumdashboard;
