@@ -1,10 +1,9 @@
 
 import PdfRenderer from '@/components/PdfRenderer'
 import { useUser } from '@clerk/nextjs';
-import { PrismaClient } from '@prisma/client'
 import { auth } from '@clerk/nextjs'
+import prisma from '@/lib/prisma';
 
-const prisma = new PrismaClient();
 
 interface PageProps {
     params: {

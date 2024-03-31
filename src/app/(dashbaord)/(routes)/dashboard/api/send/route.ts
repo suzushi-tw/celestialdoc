@@ -1,7 +1,6 @@
 import { EmailTemplate } from '@/components/email-template';
 import { Resend } from 'resend';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { db } from '@/lib/prisma';
 import { absoluteUrl } from '@/lib/utils';
 import { auth } from '@clerk/nextjs';
 import { PrismaClient } from '@prisma/client';

@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Navbar from "@/components/Navbar";
 import { ClerkProvider } from '@clerk/nextjs'
 import Providers from "@/components/Providers";
+import { GeistSans } from "geist/font/sans"; 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,8 +21,8 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <Providers>
-        <html lang="en">
-          <body className={inter.className}>
+        <html lang="en" className={`${GeistSans.className} antialiased dark:bg-gray-950`}>
+          <body className={inter.className} >
             <Navbar />
             {/* <Header /> */}
             {children}
