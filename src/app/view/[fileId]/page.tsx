@@ -3,6 +3,7 @@ import PdfRenderer from '@/components/PdfRenderer'
 import { useUser } from '@clerk/nextjs';
 import { PrismaClient } from '@prisma/client'
 import { auth } from '@clerk/nextjs'
+import Pdfview from '@/components/view/Pdfview';
 
 const prisma = new PrismaClient();
 
@@ -15,11 +16,10 @@ interface PageProps {
 const Page = async ({ params }: PageProps) => {
     const { fileId } = params
     const { userId } = auth();
-   
-    const file = await prisma.file.findFirst({
+
+    const file = await prisma.send.findFirst({
         where: {
             id: fileId,
-            userId: userId,
         },
     })
     if (!file) {
@@ -33,13 +33,11 @@ const Page = async ({ params }: PageProps) => {
                 <div className='flex-1 xl:flex'>
                     <div className='px-4 py-6 sm:px-6 lg:pl-8 xl:flex-1 xl:pl-6'>
                         {/* Main area */}
-                        <PdfRenderer url={file.url} fileId={file.id} />
+                        <Pdfview file={file} />
                     </div>
                 </div>
 
-                {/* <div className='shrink-0 flex-[0.75] border-t border-gray-200 lg:w-96 lg:border-l lg:border-t-0 max-h-[calc(100vh-3.5rem-20rem)] min-f-full'>
 
-                </div> */}
             </div>
         </div>
     )

@@ -21,8 +21,8 @@ const PdfFullscreen = ({ fileUrl }: PdfFullscreenProps) => {
 
   const { toast } = useToast()
 
-  const { width, ref } = useResizeDetector()
-
+  // const { width, ref } = useResizeDetector()
+  const width = 800;
   return (
     <Dialog
       open={isOpen}
@@ -45,7 +45,7 @@ const PdfFullscreen = ({ fileUrl }: PdfFullscreenProps) => {
         <SimpleBar
           autoHide={false}
           className='max-h-[calc(100vh-10rem)] mt-6'>
-          <div ref={ref}>
+          <div >
             <Document
               loading={
                 <div className='flex justify-center'>

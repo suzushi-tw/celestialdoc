@@ -44,7 +44,7 @@ export function DialogDemo({ url, fileId }: SendProps) {
                 password,
                 isDownloadEnabled,
                 email,
-                url,
+                fileId
             })
 
             // handle response here
