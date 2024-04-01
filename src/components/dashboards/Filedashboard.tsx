@@ -66,6 +66,7 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/TextLayer.css'
 import 'react-pdf/dist/Page/AnnotationLayer.css'
 import { toast } from '../ui/use-toast'
+import { latestviewedfile } from '@/server/action'
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 
@@ -93,8 +94,11 @@ const Filesdashboard = () => {
 
 
     const { toast } = useToast()
+    const handlelatestviewed = async (fileId: string) => {
+        await latestviewedfile(fileId);
+        // 然後導航到新的頁面
 
-
+    };
 
     const [isCollapsed, setIsCollapsed] = React.useState(false)
 
@@ -236,7 +240,10 @@ const Filesdashboard = () => {
                                                 <Card className="w-full h-full">
                                                     <Link
                                                         href={`/dashboard/${file.id}`}
-                                                        className='flex flex-col gap-2'>
+                                                        className='flex flex-col gap-2'
+                                                        onClick={(event) => {
+                                                            handlelatestviewed(file.id); // 更新最近查看的文件
+                                                        }}>
                                                         <CardHeader>
                                                             <CardTitle>
                                                                 <h3 className='truncate text-lg font-medium text-zinc-900'>

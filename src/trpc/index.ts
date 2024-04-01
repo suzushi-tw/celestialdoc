@@ -53,7 +53,7 @@ export const appRouter = router({
     return await prisma.file.findMany({
       where: { userId: userId },
       orderBy: { updatedAt: 'desc' },
-      take: 5,
+      take: 3,
     });
   }),
 

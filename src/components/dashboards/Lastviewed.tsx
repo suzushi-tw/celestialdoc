@@ -10,17 +10,20 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-  } from "@/components/ui/table"
-  import { trpc } from '@/app/_trpc/client'
+    TableCaption
+} from "@/components/ui/table"
+import { trpc } from '@/app/_trpc/client'
+import { Skeleton } from "@/components/ui/skeleton"
+
 
 export const Lastviewed = () => {
 
-    const { data: files, isLoading } = trpc.getRecentFiles.useQuery();
+    const { data: recentlyViewedFiles, isLoading } = trpc.getRecentFiles.useQuery();
 
     return (
         <>
 
-            <Tabs defaultValue="week" className="h-full">
+            <Tabs defaultValue="files" className="h-full">
                 <div className="flex items-center">
                     <TabsList>
                         <TabsTrigger value="files">Files</TabsTrigger>
@@ -68,11 +71,35 @@ export const Lastviewed = () => {
                         <CardHeader className="px-7">
                             <CardTitle>Files</CardTitle>
                             <CardDescription>
-                                Recently viewd files...
+                                Recently viewed files...
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
+                            <Table>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead >File Name</TableHead>
+                                        {/* <TableHead>Status</TableHead>
+                                        <TableHead>Method</TableHead> */}
+                                        <TableHead className="text-right">Date</TableHead>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
+                                    {isLoading ? (
+                                        <TableRow>
+                                            <TableCell colSpan={2}><Skeleton className="w-[100px] h-[20px] rounded-full" /></TableCell>
+                                        </TableRow>
+                                    ) : (
+                                        recentlyViewedFiles?.map((file) => (
+                                            <TableRow key={file.id}>
+                                                <TableCell className="font-medium truncate max-w-32">{file.name}</TableCell>
+                                                <TableCell className="text-right">{new Date(file.updatedAt).toLocaleDateString()}</TableCell>
+                                            </TableRow>
+                                        ))
+                                    )}
+                                </TableBody>
 
+                            </Table>
                         </CardContent>
                     </Card>
                 </TabsContent>
