@@ -3,8 +3,19 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuChe
 import { Button } from "../ui/button"
 import { Card, CardContent, CardTitle, CardDescription, CardHeader } from "../ui/card"
 import { File, ListFilter } from "lucide-react"
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+  } from "@/components/ui/table"
+  import { trpc } from '@/app/_trpc/client'
 
 export const Lastviewed = () => {
+
+    const { data: files, isLoading } = trpc.getRecentFiles.useQuery();
 
     return (
         <>

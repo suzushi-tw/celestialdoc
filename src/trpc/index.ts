@@ -47,6 +47,16 @@ export const appRouter = router({
     })
   }),
 
+  getRecentFiles: privateProcedure.query(async ({ ctx }) => {
+    const { userId } = ctx
+
+    return await prisma.file.findMany({
+      where: { userId: userId },
+      orderBy: { updatedAt: 'desc' },
+      take: 5,
+    });
+  }),
+
 
   getUserAlbum: privateProcedure.query(async ({ ctx }) => {
     const { userId } = ctx
