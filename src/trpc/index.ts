@@ -57,6 +57,31 @@ export const appRouter = router({
     });
   }),
 
+  filescount: privateProcedure.query(async ({ ctx }) => {
+    const { userId } = ctx
+
+    const fileExtensions = ['.pdf', '.docx', '.xls'];
+    const fileCounts = await Promise.all(fileExtensions.map(async (extension) => {
+      const count = await prisma.file.count({
+        where: { userId: userId, name: { contains: extension } },
+      });
+
+      return { type: extension, count };
+    }));
+
+    const albumExtensions = ['.jpg', '.png', '.mp4', '.avi'];
+    const albumCounts = await Promise.all(albumExtensions.map(async (extension) => {
+      const count = await prisma.album.count({
+        where: { userId: userId, name: { contains: extension } },
+      });
+
+      return { type: extension, count };
+    }));
+
+    return [...fileCounts, ...albumCounts];
+  }),
+
+
 
   getUserAlbum: privateProcedure.query(async ({ ctx }) => {
     const { userId } = ctx

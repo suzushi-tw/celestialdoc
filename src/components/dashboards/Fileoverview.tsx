@@ -1,5 +1,5 @@
 import { BarList } from "@/components/dashboards/Barlist"
-
+import { trpc } from '@/app/_trpc/client'
 
 const data = [
     { name: "/PDF", value: 586 },
@@ -11,11 +11,13 @@ const data = [
 
 export const BarListdashboard = () => {
 
+    const { data, error, isLoading } = trpc.filescount.useQuery();
+    const formattedData = data?.map(item => ({ name: item.type, value: item.count })) || [];
     return (
         <>
 
             <BarList
-                data={data}
+                data={formattedData}
 
             />
         </>
