@@ -2,9 +2,8 @@ import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
 export function absoluteUrl(path: string) {
-  // const { protocol, host } = window.location;
-  // return `${protocol}//${host}${path}`;
-  return `https://celestaildoc.com${path}`;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  return `${baseUrl}${path}`;
 }
 
 export function cx(...args: ClassValue[]) {
