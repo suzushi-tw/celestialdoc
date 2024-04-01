@@ -82,7 +82,7 @@ const Albumdashboard = () => {
 
     
 
-    const { mutate: deleteFile } = trpc.deleteFile.useMutation({
+    const { mutate: deleteFile } = trpc.deleteAlbum.useMutation({
         onSuccess: () => {
             utils.getUserFiles.invalidate()
         },
@@ -93,6 +93,8 @@ const Albumdashboard = () => {
             setFile(null);
         }
     })
+
+
 
 
     const { toast } = useToast()
@@ -256,7 +258,7 @@ const Albumdashboard = () => {
                                     <h3 className='font-semibold text-xl'>
                                         Pretty empty around here
                                     </h3>
-                                    <p>Let&apos;s upload your first PDF.</p>
+                                    <p>Let&apos;s upload your first file.</p>
                                 </div>
                             )
                         }

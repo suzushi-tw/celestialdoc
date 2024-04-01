@@ -29,10 +29,9 @@ export async function POST(req: Request, res: Response) {
     if (req.method === 'POST') {
 
 
-
         const body = await req.json();
         const { file_key, file_name, userid } = body;
-        console.log(file_key, file_name);
+        console.log("creating new files in album"+file_key, file_name);
 
 
 
@@ -44,7 +43,7 @@ export async function POST(req: Request, res: Response) {
         };
 
         try {
-            const isFileExist = await prisma.file.findFirst({
+            const isFileExist = await prisma.album.findFirst({
                 where: {
                     key: file.key,
                 },
@@ -53,7 +52,7 @@ export async function POST(req: Request, res: Response) {
             if (isFileExist) return
 
 
-            const createdFile = await prisma.file.create({
+            const createdFile = await prisma.album.create({
                 data: {
                     key: file.key,
                     name: file.name,
@@ -82,7 +81,3 @@ export async function POST(req: Request, res: Response) {
         }
     }
 }
-
-
-
-

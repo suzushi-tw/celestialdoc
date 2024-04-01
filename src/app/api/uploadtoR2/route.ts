@@ -43,7 +43,7 @@ export async function POST(req: Request, res: Response) {
         };
 
         try {
-            const isFileExist = await prisma.file.findFirst({
+            const isFileExist = await prisma.album.findFirst({
                 where: {
                     key: file.key,
                 },

@@ -11,6 +11,7 @@ import { trpc } from '@/app/_trpc/client'
 import axios from 'axios'
 import { useUser } from '@clerk/nextjs';
 import { uploadToR2 } from '@/lib/r2'
+import { uploadToalbum } from '@/lib/album'
 
 function Uploadsection() {
 
@@ -67,9 +68,10 @@ function Uploadsection() {
 
                 if (file.type.startsWith('image/') || file.type === 'video/mp4') {
                     // Upload images and videos to Cloudflare R2
-                    const data = await uploadToR2(file);
+                    const data = await uploadToalbum(file);
+                    console.log("calling uploadtoalbum")
                     if (user) {
-                        const response = await axios.post("/api/uploadtoR2", {
+                        const response = await axios.post("/api/uploadAlbum", {
                             file_key: data.file_key,
                             file_name: data.file_name,
                             userid: user.id,

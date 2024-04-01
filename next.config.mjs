@@ -4,7 +4,7 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'ceea2674bbf2e4bc6d1b80b67768b695.r2.cloudflarestorage.com',
+                hostname: 'celestialdoc.s3.eu-central-1.amazonaws.com',
                 port: '',
             },
             {

@@ -47,7 +47,7 @@ export const appRouter = router({
     })
   }),
 
-  
+
   getUserAlbum: privateProcedure.query(async ({ ctx }) => {
     const { userId } = ctx
 
@@ -109,6 +109,53 @@ export const appRouter = router({
       if (!file) throw new TRPCError({ code: 'NOT_FOUND' })
 
       await prisma.file.delete({
+        where: {
+          id: input.id,
+          key: input.key,
+        },
+      })
+
+
+      const client = new S3Client({
+        region: process.env.S3_UPLOAD_REGION,
+        credentials: {
+          secretAccessKey: process.env.S3_UPLOAD_SECRET || '',
+          accessKeyId: process.env.S3_UPLOAD_KEY || '',
+        },
+      });
+      try {
+        const deleteParams = {
+          Bucket: process.env.S3_UPLOAD_BUCKET,
+          Key: input.key,
+        };
+
+        await client.send(new DeleteObjectCommand(deleteParams));
+
+
+      } catch (error) {
+        console.error('Error deleting file:', error);
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR' })
+      }
+
+
+      return file
+    }),
+
+  deleteAlbum: privateProcedure
+    .input(z.object({ id: z.string(), key: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const { userId } = ctx
+
+      const file = await prisma.album.findFirst({
+        where: {
+          id: input.id,
+          userId,
+        },
+      })
+
+      if (!file) throw new TRPCError({ code: 'NOT_FOUND' })
+
+      await prisma.album.delete({
         where: {
           id: input.id,
           key: input.key,
