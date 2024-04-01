@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge"
 export function absoluteUrl(path: string) {
   // const { protocol, host } = window.location;
   // return `${protocol}//${host}${path}`;
-  return `http://localhost:3000${path}`;
+  return `https://celestaildoc.com${path}`;
 }
 
 export function cx(...args: ClassValue[]) {
