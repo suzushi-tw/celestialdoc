@@ -9,9 +9,8 @@ import { NextResponse, NextRequest } from "next/server";
 // import { PLANS } from '@/config/stripe'
 // import { PrismaClient } from '@prisma/client'
 import { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
-import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
+import prisma from "@/lib/prisma";
 
 
 const client = new S3Client({
