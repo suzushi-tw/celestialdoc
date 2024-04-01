@@ -2,7 +2,6 @@ import { NextResponse, NextRequest } from "next/server";
 
 import { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand, } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { PrismaClient } from "@prisma/client";
 
 
 const client = new S3Client({

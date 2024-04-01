@@ -67,6 +67,7 @@ import { useUser } from '@clerk/clerk-react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useRef } from 'react';
 import { BarListdashboard } from './dashboards/Fileoverview'
+import { Lastviewed } from './dashboards/Lastviewed'
 
 const Dashboard = () => {
 
@@ -171,14 +172,9 @@ const Dashboard = () => {
                     </div>
                     <div className='max-w-5xl  mt-2 mx-auto flex flex-col w-full items-center justify-between gap-2 border-b border-gray-200 pb-2 sm:flex-row sm:items-center sm:gap-0'>
                         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7 w-full max-w-5xl">
-                            <Card className="col-span-4">
-                                <CardHeader>
-                                    <CardTitle>Last viewed</CardTitle>
-                                </CardHeader>
-                                <CardContent className="pl-2">
-
-                                </CardContent>
-                            </Card>
+                            <div className='col-span-4'>
+                                <Lastviewed />
+                            </div>
                             <Card className="col-span-3">
                                 <CardHeader>
                                     <CardTitle>Overview</CardTitle>
