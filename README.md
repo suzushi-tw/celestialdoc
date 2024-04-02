@@ -59,10 +59,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## License
 
-Open source under GPL 3.0 License, you are welcome to 
+Open source under Apache 2.0 License, you are welcome to 
 
 - Self host
 - Make any modification 
 - Commercialize it
 
-Modification should be open source so interested user can take a look at it. 
+In the case of commerical use, This License does not grant permission to use the trade names, trademarks, service marks, or product names of the Licensor. 
