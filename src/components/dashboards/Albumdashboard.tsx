@@ -269,4 +269,4 @@ const Albumdashboard = () => {
     )
 }
 
-export default Albumdashboard;
+export default Albumdashboard
