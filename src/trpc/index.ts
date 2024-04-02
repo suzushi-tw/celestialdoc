@@ -57,6 +57,26 @@ export const appRouter = router({
     });
   }),
 
+  getRecentAlbum: privateProcedure.query(async ({ ctx }) => {
+    const { userId } = ctx
+
+    return await prisma.album.findMany({
+      where: { userId: userId },
+      orderBy: { updatedAt: 'desc' },
+      take: 3,
+    });
+  }),
+  getRecentSent: privateProcedure.query(async ({ ctx }) => {
+    const { userId } = ctx
+
+    return await prisma.send.findMany({
+      where: { userId: userId },
+      orderBy: { createdAt: 'desc' },
+      take: 5,
+    });
+  }),
+
+
   filescount: privateProcedure.query(async ({ ctx }) => {
     const { userId } = ctx
 

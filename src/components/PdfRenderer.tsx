@@ -5,6 +5,8 @@ import {
   Loader2,
   RotateCw,
   Search,
+  RotateCwSquare,
+  RotateCcwSquare
 } from 'lucide-react'
 import { Document, Page, pdfjs } from 'react-pdf'
 
@@ -89,6 +91,7 @@ const PdfRenderer = ({ url, fileId }: PdfRendererProps) => {
     setValue('page', String(page))
   }
 
+
   return (
 
     <div className='w-full bg-white rounded-md shadow flex flex-col items-center '>
@@ -147,8 +150,8 @@ const PdfRenderer = ({ url, fileId }: PdfRendererProps) => {
 
         <div className='space-x-2'>
 
-          <DialogDemo fileId={fileId} url={url}/>
-          <DropdownMenu>
+          <DialogDemo fileId={fileId} url={url} />
+          {/* <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
                 className='gap-1.5'
@@ -177,13 +180,22 @@ const PdfRenderer = ({ url, fileId }: PdfRendererProps) => {
                 250%
               </DropdownMenuItem>
             </DropdownMenuContent>
-          </DropdownMenu>
+          </DropdownMenu> */}
+
+          <Button
+            onClick={() => setRotation((prev) => prev - 90)}
+            variant='ghost'
+            aria-label='rotate 90 degrees'>
+            {/* <RotateCw className='h-4 w-4' /> */}
+           <RotateCcwSquare className='h-4 w-4'/>
+          </Button>
 
           <Button
             onClick={() => setRotation((prev) => prev + 90)}
             variant='ghost'
             aria-label='rotate 90 degrees'>
-            <RotateCw className='h-4 w-4' />
+            {/* <RotateCw className='h-4 w-4' /> */}
+           <RotateCwSquare className='h-4 w-4'/>
           </Button>
 
           <PdfFullscreen fileUrl={url} />

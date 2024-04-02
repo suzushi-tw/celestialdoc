@@ -40,6 +40,7 @@ import { ReactNode } from "react";
 
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable"
 import { Nav } from './Sidenav'
+import { BarList } from './dashboards/Barlist'
 
 import {
     AlertCircle,
@@ -66,8 +67,8 @@ import Uploadsection from './Uploadsection'
 import { useUser } from '@clerk/clerk-react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useRef } from 'react';
-import { BarListdashboard } from './dashboards/Fileoverview'
 import { Lastviewed } from './dashboards/Lastviewed'
+import { Skeleton } from './ui/skeleton'
 
 const Dashboard = () => {
 
@@ -77,7 +78,8 @@ const Dashboard = () => {
 
     const retry = useRef(0);
     const maxRetryCount = 5;
-
+    const { data, error, isLoading } = trpc.filescount.useQuery();
+    const formattedData = data?.map(item => ({ name: item.type, value: item.count })) || [];
 
     const { refetch } = trpc.authCallback.useQuery(undefined, {
         onSuccess: ({ success }) => {
@@ -180,7 +182,21 @@ const Dashboard = () => {
                                     <CardTitle>Overview</CardTitle>
                                 </CardHeader>
                                 <CardContent>
-                                    <BarListdashboard />
+
+                                    {isLoading ? (
+                                        <div className="flex flex-col space-y-3 items-center justify-center">
+                                            <Skeleton className="h-[125px] w-2/3 rounded-xl" />
+                                            <div className="space-y-2">
+                                                <Skeleton className="h-4 w-1/2" />
+                                                <Skeleton className="h-4 w-1/2" />
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <BarList
+                                            data={formattedData}
+
+                                        />
+                                    )}
                                 </CardContent>
                             </Card>
                         </div>

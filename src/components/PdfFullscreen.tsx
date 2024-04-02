@@ -10,6 +10,7 @@ import SimpleBar from 'simplebar-react'
 import { Document, Page } from 'react-pdf'
 import { useToast } from './ui/use-toast'
 import { useResizeDetector } from 'react-resize-detector'
+import { ScrollArea } from './ui/scroll-area'
 
 interface PdfFullscreenProps {
   fileUrl: string
@@ -21,8 +22,8 @@ const PdfFullscreen = ({ fileUrl }: PdfFullscreenProps) => {
 
   const { toast } = useToast()
 
-  // const { width, ref } = useResizeDetector()
-  const width = 800;
+  const { width, ref } = useResizeDetector()
+
   return (
     <Dialog
       open={isOpen}
@@ -45,7 +46,7 @@ const PdfFullscreen = ({ fileUrl }: PdfFullscreenProps) => {
         <SimpleBar
           autoHide={false}
           className='max-h-[calc(100vh-10rem)] mt-6'>
-          <div >
+          <div ref={ref}>
             <Document
               loading={
                 <div className='flex justify-center'>
@@ -64,13 +65,16 @@ const PdfFullscreen = ({ fileUrl }: PdfFullscreenProps) => {
               }
               file={fileUrl}
               className='max-h-full'>
-              {new Array(numPages).fill(0).map((_, i) => (
-                <Page
-                  key={i}
-                  width={width ? width : 1}
-                  pageNumber={i + 1}
-                />
-              ))}
+              <ScrollArea className='h-1/2'>
+                {new Array(numPages).fill(0).map((_, i) => (
+                  <Page
+                    key={i}
+                    width={width ? width : 1}
+                    pageNumber={i + 1}
+                  />
+                ))}
+              </ScrollArea>
+
             </Document>
           </div>
         </SimpleBar>
