@@ -1,6 +1,6 @@
 
 
-<img src="./Public/Demo.png" alt="CelestialDOC dashboard" />
+<img src="./public/Demo.png" alt="CelestialDOC dashboard" />
 
 ## CelestialDOC
 
