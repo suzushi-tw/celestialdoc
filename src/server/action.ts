@@ -10,9 +10,9 @@ export async function favoritefile(fileId: string, isfavorited: boolean) {
 }
 
 export async function latestviewedfile(fileId: string) {
-    const {userId}=auth();
+    const { userId } = auth();
     await prisma.file.update({
-        where: { 
+        where: {
             id: fileId,
             userId: userId,
         },
@@ -21,13 +21,13 @@ export async function latestviewedfile(fileId: string) {
 }
 
 export async function changepasswordstate(hasPassword: boolean, sendid: string) {
-    const {userId}=auth();
+    const { userId } = auth();
     if (!sendid) {
         throw new Error('fileId is required');
     }
-    console.log("theswitch state"+hasPassword+" "+sendid);
+    console.log("theswitch state" + hasPassword + " " + sendid);
     await prisma.send.update({
-        where: { 
+        where: {
             id: sendid,
             userId: userId,
         },
@@ -37,17 +37,31 @@ export async function changepasswordstate(hasPassword: boolean, sendid: string) 
 
 
 export async function changedownloadstate(hasDownload: boolean, sendid: string) {
-    const {userId}=auth();
+    const { userId } = auth();
     if (!sendid) {
         throw new Error('fileId is required');
     }
-    console.log("theswitch state"+hasDownload+" "+sendid);
+    console.log("theswitch state" + hasDownload + " " + sendid);
     await prisma.send.update({
-        where: { 
+        where: {
             id: sendid,
             userId: userId,
         },
         data: { isDownloadEnabled: hasDownload },
+    });
+}
+
+export async function Deletesent(sendid: string) {
+    const { userId } = auth();
+    if (!sendid) {
+        throw new Error('fileId is required');
+    }
+    console.log("deleting sent" + sendid);
+    await prisma.send.delete({
+        where: {
+            id: sendid,
+            userId: userId,
+        },
     });
 }
 

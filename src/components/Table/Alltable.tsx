@@ -37,7 +37,7 @@ import {
 } from "@/components/ui/table"
 import { trpc } from '@/app/_trpc/client'
 import { Switch } from "../ui/switch"
-import { changepasswordstate, changedownloadstate } from "@/server/action"
+import { changepasswordstate, changedownloadstate, Deletesent } from "@/server/action"
 import { useState } from "react"
 import {
     Select,
@@ -52,6 +52,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { not } from "drizzle-orm"
 
 const notify = () => toast.success('Successfully Updated !');
+const notifydelete = () => toast.success("Deleting !");
 
 export type RecentlySent = {
     id: string
@@ -221,6 +222,38 @@ export const columns: ColumnDef<RecentlySent>[] = [
         cell: ({ row }) => {
             const date = new Date(row.getValue("createdAt"));
             return <div>{date.toLocaleDateString()}</div>;
+        },
+    },
+    {
+        id: "actions",
+        enableHiding: false,
+        cell: ({ row }) => {
+            const payment = row.original
+            const sendid = String(row.getValue("id"));
+            return (
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" className="h-8 w-8 p-0">
+                            <span className="sr-only">Open menu</span>
+                            <MoreHorizontal className="h-4 w-4" />
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuItem className="text-red-600"
+                            onClick={() => {
+                                Deletesent(sendid);
+                                notifydelete();
+                            }}
+                        >
+                            Delete
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        {/* <DropdownMenuItem>View customer</DropdownMenuItem>
+                        <DropdownMenuItem>View payment details</DropdownMenuItem> */}
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            )
         },
     },
 ]

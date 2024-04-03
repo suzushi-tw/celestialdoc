@@ -8,18 +8,25 @@ export async function POST(req: Request, res: Response) {
     if (req.method === 'POST') {
 
         const client = new S3Client({
-            region: process.env.S3_UPLOAD_REGION
-        })
+            region: process.env.S3_UPLOAD_REGION,
+            credentials: {
+                secretAccessKey: process.env.S3_UPLOAD_SECRET || '',
+                accessKeyId: process.env.S3_UPLOAD_KEY || '',
+            },
+        });
+        console.log("getting download url")
         const body = await req.json();
-        let { file_key } = body;
+        let { File_key } = body;
+        console.log(File_key)
         const command = new GetObjectCommand({
             Bucket: process.env.S3_UPLOAD_BUCKET,
-            Key: file_key
+            Key: File_key
         })
 
         try {
+            
             const signedUrl = await getSignedUrl(client, command, { expiresIn: 3600 });
-
+            console.log(signedUrl)
             return Response.json({ success: true, url: signedUrl });
         } catch (error) {
             return Response.json({ error });

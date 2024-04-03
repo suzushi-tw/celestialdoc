@@ -41,6 +41,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Card } from '@/components/ui/card'
 import { DialogDemo } from '@/components/Sendandshare'
 import axios from 'axios'
+import toast, { Toaster } from 'react-hot-toast';
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 // pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 
@@ -62,11 +63,12 @@ type File = {
     userId: string | null;
     fileId: string | null;
 };
-
+const notifydownload = () => toast.success('Downloading files ...', {
+    duration: 5000
+});
 
 const Pdfview = ({ file }: { file: File }) => {
     const { toast } = useToast()
-
     const [numPages, setNumPages] = useState<number>()
     const [currPage, setCurrPage] = useState<number>(1)
     const [scale, setScale] = useState<number>(1)
@@ -105,10 +107,24 @@ const Pdfview = ({ file }: { file: File }) => {
     }
 
     const handleDownload = async () => {
+        notifydownload();
         try {
-            const response = await axios.post('api/send', {
+
+            const response = await axios.post('api/download', {
                 File_key: file.Key
             })
+            const presignedUrl = response.data.url; // Adjust this based on your actual response structure
+
+            const presignedresponse = await fetch(presignedUrl);
+            const blob = await presignedresponse.blob();
+
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', file.name); // Specify the filename
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         } catch (error) {
             console.error('Download failed:', error);
         }
@@ -249,6 +265,7 @@ const Pdfview = ({ file }: { file: File }) => {
             </div>
 
             <div className='flex-1 w-full max-h-[calc(100vh-10rem)]'>
+                <Toaster />
                 <SimpleBar
                     autoHide={false}
                     className='max-h-[calc(100vh-10rem)]'>
