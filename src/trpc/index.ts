@@ -6,12 +6,10 @@ import { z } from 'zod';
 import { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { absoluteUrl } from '@/lib/utils';
 
-import { PrismaClient } from '@prisma/client'
+import prisma from '@/lib/prisma';
 import { auth } from '@clerk/nextjs';
 import axios from 'axios';
 
-
-const prisma = new PrismaClient();
 
 
 export const appRouter = router({

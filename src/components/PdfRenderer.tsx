@@ -40,18 +40,19 @@ import { Switch } from "@/components/ui/switch"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Card } from './ui/card'
 import { DialogDemo } from './Sendandshare'
-
+import toast, { Toaster } from 'react-hot-toast';
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 // pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 
 interface PdfRendererProps {
   url: string
   fileId: string
+  filename: string
 }
 
 
 
-const PdfRenderer = ({ url, fileId }: PdfRendererProps) => {
+const PdfRenderer = ({ url, fileId, filename }: PdfRendererProps) => {
   const { toast } = useToast()
 
   const [numPages, setNumPages] = useState<number>()
@@ -97,7 +98,8 @@ const PdfRenderer = ({ url, fileId }: PdfRendererProps) => {
     <div className='w-full bg-white rounded-md shadow flex flex-col items-center '>
       <div className='h-14 w-full border-b border-zinc-200 flex items-center justify-between px-2'>
         <div className='flex items-center gap-1.5'>
-          <Button
+          <p className='ml-6'>{filename}</p>
+          {/* <Button
             disabled={currPage <= 1}
             onClick={() => {
               setCurrPage((prev) =>
@@ -143,7 +145,7 @@ const PdfRenderer = ({ url, fileId }: PdfRendererProps) => {
             variant='ghost'
             aria-label='next page'>
             <ChevronUp className='h-4 w-4' />
-          </Button>
+          </Button> */}
 
 
         </div>
@@ -203,6 +205,7 @@ const PdfRenderer = ({ url, fileId }: PdfRendererProps) => {
       </div>
 
       <div className='flex-1 w-full max-h-[calc(100vh-10rem)]'>
+          <Toaster />
         <SimpleBar
           autoHide={false}
           className='max-h-[calc(100vh-10rem)]'>

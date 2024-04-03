@@ -5,6 +5,8 @@ import {
     Loader2,
     RotateCw,
     Search,
+    RotateCcwSquare,
+    RotateCwSquare
 } from 'lucide-react'
 import { Document, Page, pdfjs } from 'react-pdf'
 
@@ -103,16 +105,7 @@ const Pdfview = ({ file }: { file: File }) => {
 
     const handleDownload = async () => {
         try {
-            const response = await fetch(file.url);
-            const blob = await response.blob();
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = file.name;
-            document.body.appendChild(a); // Required for Firefox
-            a.click();
-            a.remove();
-            window.URL.revokeObjectURL(url);
+           
         } catch (error) {
             console.error('Download failed:', error);
         }
@@ -124,7 +117,8 @@ const Pdfview = ({ file }: { file: File }) => {
         <div className='w-full bg-white rounded-md shadow flex flex-col items-center '>
             <div className='h-14 w-full border-b border-zinc-200 flex items-center justify-between px-2'>
                 <div className='flex items-center gap-1.5'>
-                    <Button
+                    <p className='ml-6'>{file.name}</p>
+                    {/* <Button
                         disabled={currPage <= 1}
                         onClick={() => {
                             setCurrPage((prev) =>
@@ -170,14 +164,14 @@ const Pdfview = ({ file }: { file: File }) => {
                         variant='ghost'
                         aria-label='next page'>
                         <ChevronUp className='h-4 w-4' />
-                    </Button>
+                    </Button> */}
 
 
                 </div>
 
                 <div className='space-x-2'>
 
-                    <DialogDemo fileId={file.id} url={file.url} />
+
                     {file.isDownloadEnabled && (
                         // <Button
                         //     onClick=
@@ -189,12 +183,12 @@ const Pdfview = ({ file }: { file: File }) => {
                             onClick={handleDownload}>
                             <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
                             <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-white px-3 py-1 text-sm font-medium text-black backdrop-blur-3xl">
-                                Send or share
+                                Download
                             </span>
                         </Button>
                     )}
 
-                    <DropdownMenu>
+                    {/* <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button
                                 className='gap-1.5'
@@ -230,6 +224,21 @@ const Pdfview = ({ file }: { file: File }) => {
                         variant='ghost'
                         aria-label='rotate 90 degrees'>
                         <RotateCw className='h-4 w-4' />
+                    </Button> */}
+                    <Button
+                        onClick={() => setRotation((prev) => prev - 90)}
+                        variant='ghost'
+                        aria-label='rotate 90 degrees'>
+                        {/* <RotateCw className='h-4 w-4' /> */}
+                        <RotateCcwSquare className='h-4 w-4' />
+                    </Button>
+
+                    <Button
+                        onClick={() => setRotation((prev) => prev + 90)}
+                        variant='ghost'
+                        aria-label='rotate 90 degrees'>
+                        {/* <RotateCw className='h-4 w-4' /> */}
+                        <RotateCwSquare className='h-4 w-4' />
                     </Button>
 
                     <PdfFullscreen fileUrl={file.url} />

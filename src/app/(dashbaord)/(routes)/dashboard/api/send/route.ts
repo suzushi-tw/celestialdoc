@@ -3,10 +3,10 @@ import { Resend } from 'resend';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { absoluteUrl } from '@/lib/utils';
 import { auth } from '@clerk/nextjs';
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/lib/prisma';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const prisma = new PrismaClient();
+
 export async function POST(req: Request, res: Response) {
   if (req.method === 'POST') {
     const { userId } = auth();

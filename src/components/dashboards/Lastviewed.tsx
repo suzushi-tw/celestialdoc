@@ -123,7 +123,7 @@ export const Lastviewed = () => {
                                     </div>
                                     <DrawerFooter>
 
-                                        <Link href={"/sentdashboard"}>
+                                        <Link href={"/sent"}>
                                             <Button className="w-full">Go to Sent ...</Button>
                                         </Link>
                                         <DrawerClose asChild>

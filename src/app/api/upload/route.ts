@@ -4,10 +4,7 @@ import { NextResponse, NextRequest } from "next/server";
 // import { PDFLoader } from 'langchain/document_loaders/fs/pdf'
 // import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
 // import { PineconeStore } from 'langchain/vectorstores/pinecone'
-// import { pinecone } from '@/lib/pinecone'
-// import { getUserSubscriptionPlan } from '@/lib/stripe'
-// import { PLANS } from '@/config/stripe'
-// import { PrismaClient } from '@prisma/client'
+
 import { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import prisma from "@/lib/prisma";
 

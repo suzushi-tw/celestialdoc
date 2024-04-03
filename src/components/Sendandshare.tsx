@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
+    DialogClose,
     DialogContent,
     DialogDescription,
     DialogFooter,
@@ -16,17 +17,18 @@ import { Copy } from "lucide-react"
 import { Switch } from "./ui/switch"
 import { useState } from "react"
 import axios from "axios"
-import { useToast } from "./ui/use-toast"
+import toast, { Toaster } from 'react-hot-toast';
 
 interface SendProps {
     url: string
     fileId: string
 }
 
+const notify = () => toast.success('File Sent !');
 
 export function DialogDemo({ url, fileId }: SendProps) {
 
-    const { toast } = useToast();
+   
     const [isPasswordVisible, setPasswordVisible] = useState(false)
 
     const [password, setPassword] = useState('')
@@ -34,10 +36,8 @@ export function DialogDemo({ url, fileId }: SendProps) {
     const [email, setEmail] = useState('')
 
     const handleSubmit = async () => {
-        console.log("sending files")
-        toast({
-            description: "File has been sent !",
-        })
+       
+        notify();
         try {
             const response = await axios.post('api/send', {
                 isPasswordVisible,
@@ -71,6 +71,7 @@ export function DialogDemo({ url, fileId }: SendProps) {
                         Anyone who has this link will be able to view this.
                     </DialogDescription>
                 </DialogHeader>
+               
                 <div className="flex items-center space-x-2">
                     <div className="grid flex-1 gap-2">
                         <Label htmlFor="link" className="sr-only">
@@ -138,7 +139,10 @@ export function DialogDemo({ url, fileId }: SendProps) {
                     </div>
                 </div>
                 <DialogFooter>
-                    <Button onClick={handleSubmit}>Send</Button>
+                    <DialogClose>
+                        <Button onClick={handleSubmit}>Send</Button>
+                    </DialogClose>
+
                 </DialogFooter>
             </DialogContent>
         </Dialog>
