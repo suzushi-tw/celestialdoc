@@ -265,23 +265,34 @@ const Filesdashboard = () => {
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 512 512"><path fill="#e11d48" d="M64 464h48v48H64c-35.3 0-64-28.7-64-64V64C0 28.7 28.7 0 64 0h165.5c17 0 33.3 6.7 45.3 18.7l90.5 90.5c12 12 18.7 28.3 18.7 45.3V304h-48V160h-80c-17.7 0-32-14.3-32-32V48H64c-8.8 0-16 7.2-16 16v384c0 8.8 7.2 16 16 16m112-112h32c30.9 0 56 25.1 56 56s-25.1 56-56 56h-16v32c0 8.8-7.2 16-16 16s-16-7.2-16-16V368c0-8.8 7.2-16 16-16m32 80c13.3 0 24-10.7 24-24s-10.7-24-24-24h-16v48zm96-80h32c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48h-32c-8.8 0-16-7.2-16-16V368c0-8.8 7.2-16 16-16m32 128c8.8 0 16-7.2 16-16v-64c0-8.8-7.2-16-16-16h-16v96zm80-112c0-8.8 7.2-16 16-16h48c8.8 0 16 7.2 16 16s-7.2 16-16 16h-32v32h32c8.8 0 16 7.2 16 16s-7.2 16-16 16h-32v48c0 8.8-7.2 16-16 16s-16-7.2-16-16v-64z" /></svg>
 
                                                                 ) : null} */}
-                                                                <Document
-                                                                    file={file.url}
-                                                                    loading={
-                                                                        <div className='flex justify-center'>
-                                                                            <Loader2 className='my-24 h-6 w-6 animate-spin' />
-                                                                        </div>
-                                                                    }
-                                                                    onLoadError={() => {
-                                                                        toast({
-                                                                            title: 'Error loading PDF',
-                                                                            description: 'Please try again later',
-                                                                            variant: 'destructive',
-                                                                        })
-                                                                    }}
-                                                                >
-                                                                    <Page pageNumber={1} height={100} width={200} />
-                                                                </Document>
+                                                                {file.name.endsWith('.pdf') ? (
+                                                                    <Document
+                                                                        file={file.url}
+                                                                        loading={
+                                                                            <div className='flex justify-center'>
+                                                                                <Loader2 className='my-24 h-6 w-6 animate-spin' />
+                                                                            </div>
+                                                                        }
+                                                                        onLoadError={() => {
+                                                                            toast({
+                                                                                title: 'Error loading PDF',
+                                                                                description: 'Please try again later',
+                                                                                variant: 'destructive',
+                                                                            })
+                                                                        }}
+                                                                    >
+                                                                        <Page pageNumber={1} height={100} width={200} />
+                                                                    </Document>
+                                                                ) : (
+                                                                    <iframe
+                                                                        src={`https://view.officeapps.live.com/op/embed.aspx?src=${file.url}`}
+                                                                        width="100%"
+                                                                        height="100%"
+
+                                                                    />
+                                                                )}
+
+
                                                             </div>
                                                         </CardContent>
                                                     </Link>

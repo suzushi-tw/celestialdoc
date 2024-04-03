@@ -67,6 +67,15 @@ import 'react-pdf/dist/Page/TextLayer.css'
 import 'react-pdf/dist/Page/AnnotationLayer.css'
 import { toast } from '../ui/use-toast'
 import Image from 'next/image'
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 
@@ -80,7 +89,7 @@ const Albumdashboard = () => {
 
     const { data: files, isLoading } = trpc.getUserAlbum.useQuery();
 
-    
+
 
     const { mutate: deleteFile } = trpc.deleteAlbum.useMutation({
         onSuccess: () => {
@@ -197,23 +206,45 @@ const Albumdashboard = () => {
                                                 className='col-span-1 divide-y  shadow transition hover:shadow-lg'>
 
                                                 <Card className="w-full h-full">
-                                                    <Link
-                                                        href={`/dashboard/${file.id}`}
-                                                        className='flex flex-col gap-2'>
-                                                        <CardHeader>
-                                                            <CardTitle>
-                                                                <h3 className='truncate text-lg font-medium text-zinc-900'>
-                                                                    {file.name}
-                                                                </h3>
-                                                            </CardTitle>
 
-                                                        </CardHeader>
-                                                        <CardContent>
-                                                            <div className=' flex items-center justify-center overflow-hidden h-[200px]'>
-                                                                <Image alt={file.name} width="200" height="100" src={file.url} />
-                                                            </div>
-                                                        </CardContent>
-                                                    </Link>
+                                                    <CardHeader>
+                                                        <CardTitle>
+                                                            <h3 className='truncate text-lg font-medium text-zinc-900'>
+                                                                {file.name}
+                                                            </h3>
+                                                        </CardTitle>
+
+                                                    </CardHeader>
+                                                    <CardContent>
+                                                        {/* <div className=' flex items-center justify-center overflow-hidden h-[200px]'>
+                                                            <Image alt={file.name} width="200" height="100" src={file.url} />
+
+                                                        </div> */}
+                                                        <Dialog>
+                                                            <DialogTrigger asChild>
+                                                                <div className=' flex items-center justify-center overflow-hidden h-[200px]'>
+                                                                    <Image alt={file.name} width="200" height="100" src={file.url} />
+
+                                                                </div>
+                                                            </DialogTrigger>
+                                                            <DialogContent className="max-w-7xl w-full h-2/3">
+                                                                {/* <DialogHeader>
+                                                                    <DialogTitle>Edit profile</DialogTitle>
+                                                                    <DialogDescription>
+                                                                        Make changes to your profile here. Click save when youre done.
+                                                                    </DialogDescription>
+                                                                </DialogHeader> */}
+                                                                <div className=' flex items-center justify-center overflow-hidden h-full w-full'>
+                                                                    <Image alt={file.name} width={window.innerWidth *0.5} height={window.innerHeight * 0.8 } 
+                                                                    src={file.url} quality={100} className='objectfit-contain'/>
+                                                                </div>
+                                                                {/* <DialogFooter>
+                                                                    <Button type="submit">Save changes</Button>
+                                                                </DialogFooter> */}
+                                                            </DialogContent>
+                                                        </Dialog>
+                                                    </CardContent>
+
                                                     <CardFooter className="flex justify-between">
                                                         {/* <Button variant="outline">Cancel</Button>
                       <Button>Deploy</Button> */}

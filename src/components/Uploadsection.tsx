@@ -5,13 +5,15 @@ import { Inbox, Loader2 } from 'lucide-react'
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useRouter } from 'next/navigation'
-import { toast } from 'react-hot-toast'
+import toast, { Toaster } from 'react-hot-toast';
 import { uploadToS3 } from '@/lib/s3'
 import { trpc } from '@/app/_trpc/client'
 import axios from 'axios'
 import { useUser } from '@clerk/nextjs';
 import { uploadToR2 } from '@/lib/r2'
 import { uploadToalbum } from '@/lib/album'
+
+const notify = () => toast.success("Uploading Files !")
 
 function Uploadsection() {
 
@@ -66,6 +68,8 @@ function Uploadsection() {
                     contentType: file.type,
                 }
 
+                notify();
+
                 if (file.type.startsWith('image/') || file.type === 'video/mp4') {
                     // Upload images and videos to Cloudflare R2
                     const data = await uploadToalbum(file);
@@ -104,6 +108,7 @@ function Uploadsection() {
     return (
         <div>
             <div className="p-2 bg-white rounded-2xl w-full">
+                <Toaster />
                 <div
                     {...getRootProps({
                         className:
