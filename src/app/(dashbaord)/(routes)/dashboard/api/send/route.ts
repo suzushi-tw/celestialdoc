@@ -38,6 +38,7 @@ export async function POST(req: Request, res: Response) {
               isDownloadEnabled: isDownloadEnabled,
               recipientEmail: email,
               url: file.url,
+              Key: file.key,
               name: file.name,
 
               fileId: fileId,

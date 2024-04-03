@@ -59,7 +59,8 @@ model Send {
   recipientEmail    String  @default("")
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
-  url               String
+  url               String @default("")
+  Key               String @default("")
   name              String @default("")
 
   User      User?    @relation(fields: [userId], references: [id])

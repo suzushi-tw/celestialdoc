@@ -40,7 +40,7 @@ import { Switch } from "@/components/ui/switch"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Card } from '@/components/ui/card'
 import { DialogDemo } from '@/components/Sendandshare'
-
+import axios from 'axios'
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 // pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 
@@ -57,6 +57,7 @@ type File = {
     createdAt: Date;
     updatedAt: Date;
     url: string;
+    Key: string;
     name: string;
     userId: string | null;
     fileId: string | null;
@@ -105,7 +106,9 @@ const Pdfview = ({ file }: { file: File }) => {
 
     const handleDownload = async () => {
         try {
-           
+            const response = await axios.post('api/send', {
+                File_key: file.Key
+            })
         } catch (error) {
             console.error('Download failed:', error);
         }
