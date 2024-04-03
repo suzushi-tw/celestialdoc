@@ -14,16 +14,20 @@ export default function Page() {
           <SignIn />
         </div>
       </div>
-      <div className="flex items-center justify-center py-12 w-1/2 ">
-        <Image
-          src="/fileupload.png"
-          alt="Image"
-          width={500}
-          height={500}
-          quality={100}
-          className="h-1/2 w-1/2 object-cover dark:brightness-[0.2] dark:grayscale hidden sm:block"
-        />
+      <div className="hidden sm:flex items-center justify-center py-12 w-1/2 ">
+        <div className="w-full">
+          <Image
+            src="/fileupload.png"
+            alt="Image"
+            width={700}
+            height={350}
+            quality={100}
+            className="h-1/2 w-1/2 object-contain dark:brightness-[0.2] dark:grayscale hidden sm:block"
+          />
+        </div>
+
       </div>
     </div>
+
   );
 }
