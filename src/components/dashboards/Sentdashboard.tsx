@@ -212,7 +212,7 @@ const Sentdashboard = () => {
           Send email
         </Button> */}
                     </div>
-                    <div className='mx-3 mt-6'>
+                    <div className='mx-3 mt-3'>
                         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
                             <Tabs defaultValue="all">
                                 <div className="flex items-center">
@@ -271,12 +271,6 @@ const Sentdashboard = () => {
                                         <CardContent>
                                             <Alltable />
                                         </CardContent>
-                                        <CardFooter>
-                                            <div className="text-xs text-muted-foreground">
-                                                Showing <strong>1-10</strong> of <strong>32</strong>{" "}
-                                                products
-                                            </div>
-                                        </CardFooter>
                                     </Card>
                                 </TabsContent>
                             </Tabs>
