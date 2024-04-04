@@ -56,6 +56,17 @@ The easiest way to deploy is
 - Digital Ocean
 
 
+##  Artwork
+
+Special thanks to all the artist for amazing artwork !
+Artworks used in the project falls under their 利用規約,
+which grants personal use and commercial use, however
+the copy right belongs to the original author and shall
+not be registered for trademark. 
+
+- [ガーリー素材] (https://girlysozai.com/)
+- [Shigureni free illuse] (https://www.shigureni.com/)
+
 ## License
 
 Open source under Apache 2.0 License, you are welcome to 
