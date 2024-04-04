@@ -25,7 +25,8 @@ export default function RootLayout({
       <Providers>
         <html lang="en" className={`${GeistSans.className} antialiased dark:bg-gray-950`}>
           <Head>
-            <meta property="og:image" content={"/Demo.png"} />
+
+            <meta property="og:image" content={`${process.env.NEXT_PUBLIC_BASE_URL}/Demo.png`} />
           </Head>
           <body className={inter.className} >
             <Navbar />
