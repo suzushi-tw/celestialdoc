@@ -251,12 +251,15 @@ const Pptrenderer = ({ url, fileId, filename }: PdfRendererProps) => {
                         <div className='w-full h-[calc(100vh-3.5rem-8rem)]'>
                             <DocViewer
                                 pluginRenderers={[]}
+                                //@ts-ignore
+                                prefetchMethod="GET" // TypeScript will ignore this line
                                 documents={[
                                     {
                                         uri: url,
                                     },
                                 ]}
                             />
+
                         </div>
 
                     </div>
