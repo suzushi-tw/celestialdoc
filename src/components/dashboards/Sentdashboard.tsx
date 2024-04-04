@@ -56,7 +56,7 @@ import {
     StarIcon
 } from "lucide-react"
 import {
-   
+
     Home,
     LineChart,
     ListFilter,
@@ -65,11 +65,11 @@ import {
     Package2,
     PanelLeft,
     PlusCircle,
-    
+
     Settings,
-   
-    
-  } from "lucide-react"
+
+
+} from "lucide-react"
 import { useToast } from '@/components/ui/use-toast'
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/TextLayer.css'
@@ -83,14 +83,14 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-  } from "@/components/ui/table"
-  import {
+} from "@/components/ui/table"
+import {
     Tabs,
     TabsContent,
     TabsList,
     TabsTrigger,
-  } from "@/components/ui/tabs"
-  import {
+} from "@/components/ui/tabs"
+import {
     DropdownMenu,
     DropdownMenuCheckboxItem,
     DropdownMenuContent,
@@ -98,8 +98,8 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-  } from "@/components/ui/dropdown-menu"
-  import { Badge } from "@/components/ui/badge"
+} from "@/components/ui/dropdown-menu"
+import { Badge } from "@/components/ui/badge"
 import { Alltable } from '../Table/Alltable'
 
 
@@ -171,7 +171,7 @@ const Sentdashboard = () => {
                                 label: "",
                                 icon: StarIcon,
                                 variant: "ghost",
-                                href: "/multipdf"
+                                href: "/favorite"
                             },
                             {
                                 title: "Sent",
@@ -204,7 +204,7 @@ const Sentdashboard = () => {
                 <ResizablePanel defaultSize={80}>
                     <div className='mt-1 mx-6 flex flex-col items-start justify-between gap-4 border-b border-gray-200 pb-3 sm:flex-row sm:items-center sm:gap-0'>
                         <h1 className='mb-1 font-bold text-5xl text-gray-900'>
-                            Sent: 
+                            Sent:
                         </h1>
 
                         {/* <UploadButton isSubscribed={subscriptionPlan.isSubscribed} /> */}
@@ -218,13 +218,13 @@ const Sentdashboard = () => {
                                 <div className="flex items-center">
                                     <TabsList>
                                         <TabsTrigger value="all">All</TabsTrigger>
-                                        <TabsTrigger value="active">Active</TabsTrigger>
-                                        <TabsTrigger value="draft">Draft</TabsTrigger>
+                                        <TabsTrigger value="generatelinks">Generated Links</TabsTrigger>
+                                        {/* <TabsTrigger value="draft">Draft</TabsTrigger>
                                         <TabsTrigger value="archived" className="hidden sm:flex">
                                             Archived
-                                        </TabsTrigger>
+                                        </TabsTrigger> */}
                                     </TabsList>
-                                    <div className="ml-auto flex items-center gap-2">
+                                    {/* <div className="ml-auto flex items-center gap-2">
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
                                                 <Button variant="outline" size="sm" className="h-8 gap-1">
@@ -258,18 +258,38 @@ const Sentdashboard = () => {
                                                 Add Product
                                             </span>
                                         </Button>
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <TabsContent value="all">
                                     <Card>
                                         <CardHeader>
                                             <CardTitle>All</CardTitle>
                                             <CardDescription>
-                                                All of your sent files and images ... 
+                                                All of your sent files and images ...
                                             </CardDescription>
                                         </CardHeader>
                                         <CardContent>
                                             <Alltable />
+                                        </CardContent>
+                                    </Card>
+                                </TabsContent>
+                                <TabsContent value="generatelinks">
+                                    <Card>
+                                        <CardHeader>
+                                            <CardTitle>Generated Links</CardTitle>
+                                            <CardDescription>
+                                                All of your generated links ...
+                                            </CardDescription>
+                                        </CardHeader>
+                                        <CardContent>
+                                            <div className='mt-3 flex flex-col items-center gap-2'>
+
+                                                <Image alt='work image' width={200} height={200} src={"/working.png"} />
+                                                <h3 className='font-semibold text-xl'>
+                                                    This page is under construction
+                                                </h3>
+                                                <p>Soon you can generate links to share directly</p>
+                                            </div>
                                         </CardContent>
                                     </Card>
                                 </TabsContent>

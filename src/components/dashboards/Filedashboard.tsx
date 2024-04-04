@@ -139,7 +139,7 @@ const Filesdashboard = () => {
                                 label: "",
                                 icon: StarIcon,
                                 variant: "ghost",
-                                href: "/multipdf"
+                                href: "/favorite"
                             },
                             {
                                 title: "Sent",

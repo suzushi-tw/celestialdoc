@@ -65,7 +65,7 @@ export function DialogDemo({ url, fileId }: SendProps) {
 
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
+                {/* <DialogHeader>
                     <DialogTitle>Share link</DialogTitle>
                     <DialogDescription>
                         Anyone who has this link will be able to view this.
@@ -87,7 +87,7 @@ export function DialogDemo({ url, fileId }: SendProps) {
                         <span className="sr-only">Copy</span>
                         <Copy className="h-4 w-4" />
                     </Button>
-                </div>
+                </div> */}
                 <DialogHeader>
                     <DialogTitle>Send</DialogTitle>
                     <DialogDescription>
