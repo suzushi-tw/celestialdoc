@@ -13,8 +13,22 @@ export async function uploadToS3(file: File): Promise<{ file_key: string; file_n
             });
 
             // Assuming file.type is correctly set for DOC and DOCX files
-            const file_key = "uploads/" + uuidv4() + (file.type === 'application/pdf' ? '.pdf' : file.type.includes('wordprocessingml') ? '.docx' : '.doc');
-            const new_file_key = file_key.replace(/\.docx?$/, '.pdf');
+            let extension = '';
+            if (file.type === 'application/pdf') {
+                extension = '.pdf';
+            } else if (file.type.includes('wordprocessingml')) {
+                extension = '.docx';
+            } else if (file.type.includes('msword')) {
+                extension = '.doc';
+            } else if (file.type.includes('ms-powerpoint')) {
+                extension = '.ppt';
+            } else if (file.type.includes('presentationml')) {
+                extension = '.pptx';
+            } else {
+                throw new Error('Unsupported file type: ' + file.type);
+            }
+
+            const file_key = "uploads/" + uuidv4() + extension;
             const params = {
                 Bucket: process.env.NEXT_PUBLIC_S3_BUCKET_NAME!,
                 Key: file_key,

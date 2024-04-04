@@ -51,6 +51,8 @@ function Uploadsection() {
             'application/pdf': ['.pdf'],
             'application/msword': ['.doc'],
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document': ['.docx'],
+            'application/vnd.ms-powerpoint': ['.ppt'],
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation': ['.pptx'],
             'image/*': ['.jpg', '.png'],
             'video/mp4': ['.mp4'],
         },

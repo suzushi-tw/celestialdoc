@@ -67,6 +67,7 @@ import 'react-pdf/dist/Page/TextLayer.css'
 import 'react-pdf/dist/Page/AnnotationLayer.css'
 import { toast } from '../ui/use-toast'
 import { latestviewedfile } from '@/server/action'
+import { PPTsvg, Wordsvg } from '@/lib/icon'
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 
@@ -283,14 +284,15 @@ const Filesdashboard = () => {
                                                                     >
                                                                         <Page pageNumber={1} height={100} width={200} />
                                                                     </Document>
-                                                                ) : (
-                                                                    <iframe
-                                                                        src={`https://view.officeapps.live.com/op/embed.aspx?src=${file.url}`}
-                                                                        width="100%"
-                                                                        height="100%"
-
-                                                                    />
-                                                                )}
+                                                                ) : (file.name.endsWith('.docx') || file.name.endsWith('.doc')) ? (
+                                                                    <div>
+                                                                        <Wordsvg />
+                                                                    </div>
+                                                                ) : (file.name.endsWith('.pptx') || file.name.endsWith('.ppt')) ? (
+                                                                    <div>
+                                                                        <PPTsvg />
+                                                                    </div>
+                                                                ) : null}
 
 
                                                             </div>

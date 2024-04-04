@@ -15,6 +15,8 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+
+
 export const focusInput =
   "focus:ring-2 focus:ring-blue-200 focus:border-blue-500 focus:dark:ring-blue-700/50 focus:dark:border-blue-700"
 
