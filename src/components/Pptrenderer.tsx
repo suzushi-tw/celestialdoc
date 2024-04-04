@@ -1,12 +1,12 @@
 'use client'
 import {
-    ChevronDown,
-    ChevronUp,
-    Loader2,
-    RotateCw,
-    Search,
-    RotateCwSquare,
-    RotateCcwSquare
+  ChevronDown,
+  ChevronUp,
+  Loader2,
+  RotateCw,
+  Search,
+  RotateCwSquare,
+  RotateCcwSquare
 } from 'lucide-react'
 import { Document, Page, pdfjs } from 'react-pdf'
 
@@ -27,10 +27,10 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { cn } from '@/lib/utils'
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
 } from './ui/dropdown-menu'
 
 import SimpleBar from 'simplebar-react'
@@ -41,69 +41,66 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Card } from './ui/card'
 import { DialogDemo } from './Sendandshare'
 import toast, { Toaster } from 'react-hot-toast';
-import ReactDocViewer from 'react-doc-viewer';
-import dynamic from 'next/dynamic'
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 // pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 
 
-const DocViewer = dynamic(() => import('react-doc-viewer'), { ssr: false });
 interface PdfRendererProps {
-    url: string
-    fileId: string
-    filename: string
+  url: string
+  fileId: string
+  filename: string
 }
 
 
 
 const Pptrenderer = ({ url, fileId, filename }: PdfRendererProps) => {
-    const { toast } = useToast()
+  const { toast } = useToast()
 
-    const [numPages, setNumPages] = useState<number>()
-    const [currPage, setCurrPage] = useState<number>(1)
-    const [scale, setScale] = useState<number>(1)
-    const [rotation, setRotation] = useState<number>(0)
-    const [renderedScale, setRenderedScale] = useState<
-        number | null
-    >(null)
-    const isLoading = renderedScale !== scale
-    const CustomPageValidator = z.object({
-        page: z
-            .string()
-            .refine(
-                (num) => Number(num) > 0 && Number(num) <= numPages!
-            ),
-    })
-    type TCustomPageValidator = z.infer<
-        typeof CustomPageValidator
-    >
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        setValue,
-    } = useForm<TCustomPageValidator>({
-        defaultValues: {
-            page: '1',
-        },
-        resolver: zodResolver(CustomPageValidator),
-    })
-    const { width, ref } = useResizeDetector();
-    const handlePageSubmit = ({
-        page,
-    }: TCustomPageValidator) => {
-        setCurrPage(Number(page))
-        setValue('page', String(page))
-    }
+  const [numPages, setNumPages] = useState<number>()
+  const [currPage, setCurrPage] = useState<number>(1)
+  const [scale, setScale] = useState<number>(1)
+  const [rotation, setRotation] = useState<number>(0)
+  const [renderedScale, setRenderedScale] = useState<
+    number | null
+  >(null)
+  const isLoading = renderedScale !== scale
+  const CustomPageValidator = z.object({
+    page: z
+      .string()
+      .refine(
+        (num) => Number(num) > 0 && Number(num) <= numPages!
+      ),
+  })
+  type TCustomPageValidator = z.infer<
+    typeof CustomPageValidator
+  >
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm<TCustomPageValidator>({
+    defaultValues: {
+      page: '1',
+    },
+    resolver: zodResolver(CustomPageValidator),
+  })
+  const { width, ref } = useResizeDetector();
+  const handlePageSubmit = ({
+    page,
+  }: TCustomPageValidator) => {
+    setCurrPage(Number(page))
+    setValue('page', String(page))
+  }
 
 
-    return (
+  return (
 
-        <div className='w-full bg-white rounded-md shadow flex flex-col items-center '>
-            <div className='h-14 w-full border-b border-zinc-200 flex items-center justify-between px-2'>
-                <div className='flex items-center gap-1.5'>
-                    <p className='ml-6'>{filename}</p>
-                    {/* <Button
+    <div className='w-full bg-white rounded-md shadow flex flex-col items-center '>
+      <div className='h-14 w-full border-b border-zinc-200 flex items-center justify-between px-2'>
+        <div className='flex items-center gap-1.5'>
+          <p className='ml-6'>{filename}</p>
+          {/* <Button
             disabled={currPage <= 1}
             onClick={() => {
               setCurrPage((prev) =>
@@ -152,12 +149,12 @@ const Pptrenderer = ({ url, fileId, filename }: PdfRendererProps) => {
           </Button> */}
 
 
-                </div>
+        </div>
 
-                <div className='space-x-2'>
+        <div className='space-x-2'>
 
-                    <DialogDemo fileId={fileId} url={url} />
-                    {/* <DropdownMenu>
+          <DialogDemo fileId={fileId} url={url} />
+          {/* <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
                 className='gap-1.5'
@@ -188,33 +185,33 @@ const Pptrenderer = ({ url, fileId, filename }: PdfRendererProps) => {
             </DropdownMenuContent>
           </DropdownMenu> */}
 
-                    <Button
-                        onClick={() => setRotation((prev) => prev - 90)}
-                        variant='ghost'
-                        aria-label='rotate 90 degrees'>
-                        {/* <RotateCw className='h-4 w-4' /> */}
-                        <RotateCcwSquare className='h-4 w-4' />
-                    </Button>
+          <Button
+            onClick={() => setRotation((prev) => prev - 90)}
+            variant='ghost'
+            aria-label='rotate 90 degrees'>
+            {/* <RotateCw className='h-4 w-4' /> */}
+            <RotateCcwSquare className='h-4 w-4' />
+          </Button>
 
-                    <Button
-                        onClick={() => setRotation((prev) => prev + 90)}
-                        variant='ghost'
-                        aria-label='rotate 90 degrees'>
-                        {/* <RotateCw className='h-4 w-4' /> */}
-                        <RotateCwSquare className='h-4 w-4' />
-                    </Button>
+          <Button
+            onClick={() => setRotation((prev) => prev + 90)}
+            variant='ghost'
+            aria-label='rotate 90 degrees'>
+            {/* <RotateCw className='h-4 w-4' /> */}
+            <RotateCwSquare className='h-4 w-4' />
+          </Button>
 
-                    <PdfFullscreen fileUrl={url} />
-                </div>
-            </div>
+          <PdfFullscreen fileUrl={url} />
+        </div>
+      </div>
 
-            <div className='flex-1 w-full max-h-[calc(100vh-10rem)]'>
-                <Toaster />
-                <SimpleBar
-                    autoHide={false}
-                    className='max-h-[calc(100vh-10rem)]'>
-                    <div ref={ref}>
-                        {/* <Document
+      <div className='flex-1 w-full max-h-[calc(100vh-10rem)]'>
+        <Toaster />
+        <SimpleBar
+          autoHide={false}
+          className='max-h-[calc(100vh-10rem)]'>
+          <div ref={ref}>
+            {/* <Document
               loading={
                 <div className='flex justify-center'>
                   <Loader2 className='my-24 h-6 w-6 animate-spin' />
@@ -248,26 +245,20 @@ const Pptrenderer = ({ url, fileId, filename }: PdfRendererProps) => {
               </ScrollArea>
 
             </Document> */}
-                        <div className='w-full h-[calc(100vh-3.5rem-8rem)]'>
-                            <DocViewer
-                                pluginRenderers={[]}
-                                //@ts-ignore
-                                prefetchMethod="GET" // TypeScript will ignore this line
-                                documents={[
-                                    {
-                                        uri: url,
-                                    },
-                                ]}
-                            />
+            <div className='w-full h-[calc(100vh-3.5rem-8rem)]'>
+              <iframe src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(url)}`}
+                width="100%" height="100%" >
 
-                        </div>
+              </iframe>
 
-                    </div>
-                </SimpleBar>
             </div>
-        </div>
 
-    )
+          </div>
+        </SimpleBar>
+      </div>
+    </div>
+
+  )
 }
 
 export default Pptrenderer
