@@ -36,7 +36,7 @@ const notifydownload = () => toast.success('Downloading files ...', {
     duration: 5000
 });
 
-const passworderror = () => toast.error('Passowrd error ...', {
+const passworderror = () => toast.error('Password error ...', {
     duration: 5000
 });
 

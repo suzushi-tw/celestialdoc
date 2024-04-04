@@ -41,6 +41,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Card } from './ui/card'
 import { DialogDemo } from './Sendandshare'
 import toast, { Toaster } from 'react-hot-toast';
+import { SendandsharefileDialog } from './Sendandsharefile'
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 // pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 
@@ -153,7 +154,9 @@ const Pptrenderer = ({ url, fileId, filename }: PdfRendererProps) => {
 
         <div className='space-x-2'>
 
-          <DialogDemo fileId={fileId} url={url} />
+          <SendandsharefileDialog fileId={fileId} url={url} />
+
+         
           {/* <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
