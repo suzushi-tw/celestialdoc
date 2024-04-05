@@ -15,6 +15,7 @@
     "@clerk/clerk-react": "^4.30.7",
     "@clerk/nextjs": "^4.29.9",
     "@hookform/resolvers": "^3.3.4",
+    "@lobehub/ui": "^1.137.7",
     "@neondatabase/serverless": "^0.9.0",
     "@prisma/client": "^5.11.0",
     "@prisma/extension-accelerate": "^1.0.0",
