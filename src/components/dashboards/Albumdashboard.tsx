@@ -59,7 +59,8 @@ import {
     LayoutDashboard,
     MessageCircle,
     User,
-    StarIcon
+    StarIcon,
+    MoreHorizontal
 } from "lucide-react"
 import { useToast } from '@/components/ui/use-toast'
 import { Document, Page, pdfjs } from 'react-pdf';
@@ -77,6 +78,8 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { Image, ImageGallery } from '@lobehub/ui';
+import { Filecardaction } from './Filecardaction'
+import { Gallerysvg } from '@/lib/icon'
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 
@@ -211,9 +214,12 @@ const Albumdashboard = () => {
 
                                                         <CardHeader>
                                                             <CardTitle>
-                                                                <h3 className='truncate text-lg font-medium text-zinc-900'>
-                                                                    {file.name}
-                                                                </h3>
+                                                                <div className='flex justify-between items-center'>
+                                                                    <h3 className='truncate text-lg font-medium text-zinc-900 '>
+                                                                        {file.name}
+                                                                    </h3>
+                                                                    <Filecardaction url={file.url} fileId={file.id} filename={file.name} favorite={file.favorite}/>
+                                                                </div>
                                                             </CardTitle>
 
                                                         </CardHeader>
@@ -260,8 +266,11 @@ const Albumdashboard = () => {
                                                                 </div>
 
                                                                 <div className='flex items-center gap-2'>
-                                                                    <MessageSquare className='h-4 w-4' />
-                                                                    mocked
+
+                                                                    <div className='h-4 w-4'>
+                                                                        <Gallerysvg />
+                                                                    </div>
+                                                                    Gallery
                                                                 </div>
 
                                                                 <Button

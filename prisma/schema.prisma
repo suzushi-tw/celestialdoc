@@ -27,6 +27,8 @@ model File {
   id   String @id @default(cuid())
   name String
 
+  favorite Boolean @default(false)
+
   url      String
   key      String
   Sent     Send[]
@@ -40,6 +42,8 @@ model File {
 model Album {
   id   String @id @default(cuid())
   name String
+
+  favorite Boolean@default(false)
 
   url      String
   key      String

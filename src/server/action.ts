@@ -65,3 +65,21 @@ export async function Deletesent(sendid: string) {
     });
 }
 
+export async function Togglefavoritealbume(fileId: string, favorite: boolean) {
+    const { userId } = auth();
+    if (!fileId) {
+        throw new Error('fileId is required');
+    }
+    console.log("togglefavorite"+fileId);
+    await prisma.album.update({
+        where: {
+            id: fileId,
+            userId: userId,
+        },
+        data: {
+            favorite: favorite
+        }
+    });
+}
+
+
