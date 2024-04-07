@@ -74,6 +74,18 @@ export const appRouter = router({
     });
   }),
 
+  getfavoritealbume: privateProcedure.query(async({ctx})=>{
+    const {userId}=ctx
+
+    return await prisma.album.findMany({
+      where: { 
+        userId: userId,
+        favorite: true
+      },
+      orderBy: { updatedAt: 'desc' },
+    });
+  }),
+
 
   filescount: privateProcedure.query(async ({ ctx }) => {
     const { userId } = ctx
