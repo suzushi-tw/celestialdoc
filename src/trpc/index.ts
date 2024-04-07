@@ -216,20 +216,39 @@ export const appRouter = router({
       })
 
 
-      const client = new S3Client({
+      const S3client = new S3Client({
         region: process.env.S3_UPLOAD_REGION,
         credentials: {
           secretAccessKey: process.env.S3_UPLOAD_SECRET || '',
           accessKeyId: process.env.S3_UPLOAD_KEY || '',
         },
       });
-      try {
-        const deleteParams = {
-          Bucket: process.env.S3_UPLOAD_BUCKET,
-          Key: input.key,
-        };
+      const R2client = new S3Client({
+        endpoint: process.env.R2_S3_ENDPOINT,
+        credentials: {
+          accessKeyId: process.env.R2_ACCESS_KEY_ID || '',
+          secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || '',
+        },
+        region: "auto",
+      });
 
-        await client.send(new DeleteObjectCommand(deleteParams));
+      try {
+
+        if (process.env.R2_S3_ENDPOINT) {
+          const deleteParams = {
+            Bucket: process.env.R2_BUCKET,
+            Key: input.key,
+          }
+          await R2client.send(new DeleteObjectCommand(deleteParams))
+        } else {
+          const deleteParams = {
+            Bucket: process.env.S3_UPLOAD_BUCKET,
+            Key: input.key,
+          };
+
+          await S3client.send(new DeleteObjectCommand(deleteParams));
+        }
+        
 
 
       } catch (error) {

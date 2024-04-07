@@ -4,12 +4,21 @@ import { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand, } fr
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 
-const client = new S3Client({
+const S3client = new S3Client({
     region: process.env.S3_UPLOAD_REGION,
     credentials: {
         secretAccessKey: process.env.S3_UPLOAD_SECRET || '',
         accessKeyId: process.env.S3_UPLOAD_KEY || '',
     },
+});
+
+const R2client = new S3Client({
+    endpoint: process.env.R2_S3_ENDPOINT,
+    credentials: {
+        accessKeyId: process.env.R2_ACCESS_KEY_ID || '',
+        secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || '',
+    },
+    region: "auto",
 });
 
 
@@ -28,13 +37,24 @@ export async function POST(req: Request, res: Response) {
             //     Bucket: process.env.S3_UPLOAD_BUCKET,
             //     Key: file_key,
             // });
-            const command = new PutObjectCommand({
+            const s3command = new PutObjectCommand({
                 Bucket: process.env.S3_UPLOAD_BUCKET,
                 Key: file_key,
                 ContentType: file_type,  // This should be the MIME type of your file
             });
 
-            const signedUrl = await getSignedUrl(client, command, { expiresIn: 3600 });
+            const r2command = new PutObjectCommand({
+                Bucket: process.env.R2_BUCKET,
+                Key: file_key,
+                ContentType: file_type,
+            });
+
+            let signedUrl;
+            if (process.env.R2_S3_ENDPOINT) {
+                signedUrl = await getSignedUrl(R2client, r2command, { expiresIn: 3600 }); // URL expires in 1 hour
+            } else {
+                signedUrl = await getSignedUrl(S3client, s3command, { expiresIn: 3600 }); // URL expires in 1 hour
+            }
 
             return NextResponse.json(
                 {

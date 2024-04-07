@@ -28,15 +28,20 @@ export async function POST(req: Request, res: Response) {
 
         const body = await req.json();
         const { file_key, file_name, userid } = body;
-        console.log("creating new files in album"+file_key, file_name);
+        console.log("creating new files in album" + file_key, file_name);
 
+     
+        let fileurl = "";
+        if (process.env.R2_S3_ENDPOINT) {
+            fileurl=process.env.R2_URL + encodeURIComponent(file_key);
+        } else {
+            fileurl = `https://${process.env.S3_UPLOAD_BUCKET}.s3.${process.env.S3_UPLOAD_REGION}.amazonaws.com/${file_key}`;
+        }
 
-
-        const s3url = `https://${process.env.S3_UPLOAD_BUCKET}.s3.${process.env.S3_UPLOAD_REGION}.amazonaws.com/${file_key}`;
         const file = {
             key: file_key,
             name: file_name,
-            url: s3url,
+            url: fileurl,
         };
 
         try {

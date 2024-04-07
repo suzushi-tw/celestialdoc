@@ -31,7 +31,7 @@ export async function uploadToR2(file: File): Promise<{ file_key: string; file_n
             else if (file.type === 'image/gif') extension = '.gif';
             else if (file.type === 'video/mp4') extension = '.mp4';
 
-            const file_key = "uploads/" + uuidv4() + extension;
+            const file_key =  uuidv4() + extension;
             const signedUrl = await getSignedUploadUrl(file_key); // Ensure you await here
 
             const response = await fetch(signedUrl, { // Now signedUrl is a string, not a Promise
