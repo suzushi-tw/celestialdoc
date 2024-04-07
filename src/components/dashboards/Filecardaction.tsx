@@ -45,8 +45,9 @@ export function Filecardaction({ url, fileId, filename, favorite }: SendProps) {
 
     const toggleFavorite = () => {
         // 更新狀態
-        setFavorite(!favoritestate);
         Togglefavoritealbume(fileId, favoritestate)
+        setFavorite(!favoritestate);
+        
         // 更新資料庫...
     };
 

@@ -12,6 +12,7 @@ import axios from 'axios'
 import { useUser } from '@clerk/nextjs';
 import { uploadToR2 } from '@/lib/r2'
 import { uploadToalbum } from '@/lib/album'
+import { Inboxsvg, Loadingmoonsvg } from '@/lib/icon'
 
 const notify = () => toast.success("Uploading Files !")
 
@@ -120,12 +121,14 @@ function Uploadsection() {
                     <input {...getInputProps()} />
                     {isUploading || isCreatingChat ? (
                         <>
-                            <Loader2 className="w-10 h-10 text-blue-500 animate-spin" />
+                            {/* <Loader2 className="w-10 h-10 text-blue-500 animate-spin" /> */}
+                            <Loadingmoonsvg className='w-10 h-10'/>
                             <p className="mt-2 text-sm text-slate-400">Uploading...</p>
                         </>
                     ) : (
                         <>
-                            <Inbox className="w-10 h-10 text-blue-500" />
+                            {/* <Inbox className="w-10 h-10 text-blue-500" /> */}
+                            <Inboxsvg className='w-10 h-10 text-blue-500'/>
                             <p className="mt-2 text-sm text-slate-400">Drop your file here !</p>
                         </>
                     )}

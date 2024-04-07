@@ -70,14 +70,14 @@ export async function Togglefavoritealbume(fileId: string, favorite: boolean) {
     if (!fileId) {
         throw new Error('fileId is required');
     }
-    console.log("togglefavorite"+fileId);
+    console.log("togglefavorite"+fileId+favorite);
     await prisma.album.update({
         where: {
             id: fileId,
             userId: userId,
         },
         data: {
-            favorite: favorite
+            favorite: !favorite
         }
     });
 }
