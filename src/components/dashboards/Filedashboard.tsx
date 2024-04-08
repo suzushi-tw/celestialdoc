@@ -68,6 +68,7 @@ import 'react-pdf/dist/Page/AnnotationLayer.css'
 import { toast } from '../ui/use-toast'
 import { latestviewedfile } from '@/server/action'
 import { PPTsvg, Wordsvg } from '@/lib/icon'
+import { Filecardaction } from './Filecardaction'
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 
@@ -250,6 +251,7 @@ const Filesdashboard = () => {
                                                                 <h3 className='truncate text-lg font-medium text-zinc-900'>
                                                                     {file.name}
                                                                 </h3>
+                                                                <Filecardaction url={file.url} fileId={file.id} filename={file.name} favorite={file.favorite}/>
                                                             </CardTitle>
 
                                                         </CardHeader>

@@ -71,6 +71,7 @@ import { PPTsvg, Wordsvg } from '@/lib/icon'
 import { TabsList, TabsContent, Tabs, TabsTrigger } from '../ui/tabs'
 import Image from 'next/image'
 import { Favoritealbumtable } from '../Table/Favoritealbumtable'
+import { Favoritefiletable } from '../Table/Favoritefiletable'
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 
@@ -173,15 +174,15 @@ const Favoritedashboard = () => {
                 </ResizablePanel>
                 <ResizableHandle withHandle />
                 <ResizablePanel defaultSize={80}>
-                    <div className='mt-3 mx-6 flex flex-col items-start justify-between gap-4 border-b border-gray-200 pb-5 sm:flex-row sm:items-center sm:gap-0'>
-                        <h1 className='mb-3 font-bold text-5xl text-gray-900'>
+                    <div className='mt-3 mx-6 flex flex-col items-start justify-between gap-1 border-b border-gray-200 pb-2 sm:flex-row sm:items-center sm:gap-0'>
+                        <h3 className='mb-3 font-bold text-xl text-gray-900'>
                             Favorite files :
-                        </h1>
+                        </h3>
 
-                        {/* <UploadButton isSubscribed={subscriptionPlan.isSubscribed} /> */}
-                        {/* <Button onClick={handleClick}>
-          Send email
-        </Button> */}
+                        {/* <UploadButton isSubscribed={subscriptionPlan.isSubscribed} />
+                        <Button onClick={handleClick}>
+                            Send email
+                        </Button> */}
                     </div>
                     <div className='mx-3 mt-3'>
                         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
@@ -240,8 +241,8 @@ const Favoritedashboard = () => {
                                             </CardDescription>
                                         </CardHeader>
                                         <CardContent>
+                                        <Favoritefiletable />
                                            
-                                            <Favoritealbumtable />
                                         </CardContent>
                                     </Card>
                                 </TabsContent>
@@ -254,15 +255,15 @@ const Favoritedashboard = () => {
                                             </CardDescription>
                                         </CardHeader>
                                         <CardContent>
-                                            <div className='mt-3 flex flex-col items-center gap-2'>
+                                            {/* <div className='mt-3 flex flex-col items-center gap-2'>
 
                                                 <Image alt='work image' width={200} height={200} src={"/working.png"} />
                                                 <h3 className='font-semibold text-xl'>
                                                     This page is under construction
                                                 </h3>
                                                 <p>Soon you can generate links to share directly</p>
-                                            </div>
-
+                                            </div> */}
+                                            <Favoritealbumtable />
                                         </CardContent>
                                     </Card>
                                 </TabsContent>

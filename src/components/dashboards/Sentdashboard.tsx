@@ -202,15 +202,15 @@ const Sentdashboard = () => {
                 </ResizablePanel>
                 <ResizableHandle withHandle />
                 <ResizablePanel defaultSize={80}>
-                    <div className='mt-1 mx-6 flex flex-col items-start justify-between gap-4 border-b border-gray-200 pb-3 sm:flex-row sm:items-center sm:gap-0'>
-                        <h1 className='mb-1 font-bold text-5xl text-gray-900'>
+                    <div className='mt-1 mx-6 flex flex-col items-start justify-between gap-1 border-b border-gray-200 pb-2 sm:flex-row sm:items-center sm:gap-0'>
+                        <h1 className='mb-1 font-bold text-xl text-gray-900'>
                             Sent:
                         </h1>
 
-                        {/* <UploadButton isSubscribed={subscriptionPlan.isSubscribed} /> */}
-                        {/* <Button onClick={handleClick}>
-          Send email
-        </Button> */}
+                        {/* <UploadButton isSubscribed={subscriptionPlan.isSubscribed} />
+                        <Button onClick={handleClick}>
+                            Send email
+                        </Button> */}
                     </div>
                     <div className='mx-3 mt-3'>
                         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">

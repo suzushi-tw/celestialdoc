@@ -28,7 +28,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { MoreHorizontal } from "lucide-react"
 import { Favoritesvg, Notfavoritesvg } from "@/lib/icon"
-import { Togglefavoriteafile, Togglefavoritealbume } from "@/server/action"
+import { Togglefavoritealbume } from "@/server/action"
 
 interface SendProps {
     url: string
@@ -39,13 +39,13 @@ interface SendProps {
 
 const notify = () => toast.success('Downloading files !');
 
-export function Filecardaction({ url, fileId, filename, favorite }: SendProps) {
+export function Albumcardaction({ url, fileId, filename, favorite }: SendProps) {
 
     const [favoritestate, setFavorite] = useState(favorite);
 
     const toggleFavorite = () => {
         // 更新狀態
-        Togglefavoriteafile(fileId, favoritestate)
+        Togglefavoritealbume(fileId, favoritestate)
         setFavorite(!favoritestate);
         
         // 更新資料庫...

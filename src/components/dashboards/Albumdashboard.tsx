@@ -80,6 +80,7 @@ import {
 import { Image, ImageGallery } from '@lobehub/ui';
 import { Filecardaction } from './Filecardaction'
 import { Gallerysvg } from '@/lib/icon'
+import { Albumcardaction } from './Albumcardaction'
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 
@@ -218,7 +219,8 @@ const Albumdashboard = () => {
                                                                     <h3 className='truncate text-lg font-medium text-zinc-900 '>
                                                                         {file.name}
                                                                     </h3>
-                                                                    <Filecardaction url={file.url} fileId={file.id} filename={file.name} favorite={file.favorite}/>
+                                                                    <Albumcardaction url={file.url} fileId={file.id} filename={file.name} favorite={file.favorite}/>
+                                                                    {/* <Filecardaction url={file.url} fileId={file.id} filename={file.name} favorite={file.favorite}/> */}
                                                                 </div>
                                                             </CardTitle>
 

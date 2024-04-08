@@ -1,13 +1,6 @@
 'use server'
 import prisma from "@/lib/prisma"
 import { auth } from '@clerk/nextjs';
-import { stat } from "fs";
-
-export async function favoritefile(fileId: string, isfavorited: boolean) {
-
-
-
-}
 
 export async function latestviewedfile(fileId: string) {
     const { userId } = auth();
@@ -72,6 +65,23 @@ export async function Togglefavoritealbume(fileId: string, favorite: boolean) {
     }
     console.log("togglefavorite"+fileId+favorite);
     await prisma.album.update({
+        where: {
+            id: fileId,
+            userId: userId,
+        },
+        data: {
+            favorite: !favorite
+        }
+    });
+}
+
+export async function Togglefavoriteafile(fileId: string, favorite: boolean) {
+    const { userId } = auth();
+    if (!fileId) {
+        throw new Error('fileId is required');
+    }
+    console.log("togglefavorite"+fileId+favorite);
+    await prisma.file.update({
         where: {
             id: fileId,
             userId: userId,
