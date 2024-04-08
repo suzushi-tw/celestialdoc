@@ -79,8 +79,9 @@ const Dashboard = () => {
     const retry = useRef(0);
     const maxRetryCount = 5;
     const { data, error, isLoading } = trpc.filescount.useQuery();
-    const formattedData = data?.map(item => ({ name: item.type, value: item.count })) || [];
-
+    const formattedData = data
+        ?.map(item => ({ name: item.type, value: item.count }))
+        .filter(item => item.value !== 0) || [];
     const { refetch } = trpc.authCallback.useQuery(undefined, {
         onSuccess: ({ success }) => {
             if (success) {

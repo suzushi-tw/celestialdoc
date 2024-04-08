@@ -4,8 +4,19 @@ import { absoluteUrl } from '@/lib/utils';
 import { auth } from '@clerk/nextjs';
 import { getAuth, clerkClient } from "@clerk/nextjs/server";
 import prisma from '@/lib/prisma';
+import { render } from '@react-email/render';
+import { SES } from '@aws-sdk/client-ses';
+import { Sesemailtemplate } from '@/components/Ses-email-template';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+const ses = new SES({
+  region: process.env.AWS_SES_REGION,
+  credentials: {
+    secretAccessKey: process.env.S3_UPLOAD_SECRET || '',
+    accessKeyId: process.env.S3_UPLOAD_KEY || '',
+  },
+});
 
 export async function POST(req: Request, res: Response) {
   if (req.method === 'POST') {
@@ -22,6 +33,10 @@ export async function POST(req: Request, res: Response) {
     if (!isPasswordVisible) {
       password = 'none'
     }
+
+
+
+
 
     try {
       if (userId) {
@@ -55,16 +70,42 @@ export async function POST(req: Request, res: Response) {
           // Assuming the primary email is the first email in the emailAddresses array
           const primaryEmail = user.emailAddresses[0].emailAddress;
 
-         
+          const emailHtml = render(Sesemailtemplate({ viewUrl, filename: file.name, senderemail: primaryEmail }));
 
-          const data = await resend.emails.send({
-            from: sender,
-            to: email,
-            subject: 'You have a new file ...',
-            react: EmailTemplate({ viewUrl, filename: file.name, senderemail:primaryEmail  }, { steps: [], links: [] }),
-          });
+          if (process.env.AWS_SES_REGION) {
+            const params = {
+              Source: sender,
+              Destination: {
+                ToAddresses: [email],
+              },
+              Message: {
+                Subject: {
+                  Charset: 'UTF-8',
+                  Data: 'You have a new file ...',
+                },
+                Body: {
+                  Html: {
+                    Charset: 'UTF-8',
+                    Data: emailHtml
+                  },
+                },
+              },
+            };
 
-          return Response.json(data);
+            // Send email
+            const data = await ses.sendEmail(params);
+            return Response.json(data);
+          } else {
+            const data = await resend.emails.send({
+              from: sender,
+              to: email,
+              subject: 'You have a new file ...',
+              react: EmailTemplate({ viewUrl, filename: file.name, senderemail: primaryEmail }, { steps: [], links: [] }),
+            });
+
+            return Response.json(data);
+          }
+
         }
       }
 
