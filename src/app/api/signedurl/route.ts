@@ -55,7 +55,7 @@ export async function POST(req: Request, res: Response) {
             } else {
                 signedUrl = await getSignedUrl(S3client, s3command, { expiresIn: 3600 }); // URL expires in 1 hour
             }
-
+            // console.log(signedUrl)
             return NextResponse.json(
                 {
                     success: "file created successfully",
