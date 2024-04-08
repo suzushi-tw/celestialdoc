@@ -1,5 +1,4 @@
 'use client'
-
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
@@ -54,8 +53,8 @@ export function SendpdfDialog({ fileId }: SendProps) {
 
     return (
         <Dialog>
-            <DialogTrigger asChild>
-                <h3 >Send</h3>
+            <DialogTrigger >
+                <h1 className="ml-2 text-sm">Send</h1>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 {/* <DialogHeader>

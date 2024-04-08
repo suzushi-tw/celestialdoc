@@ -252,7 +252,7 @@ export const columns: ColumnDef<RecentlySent>[] = [
                             Delete
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>
+                        <DropdownMenuItem asChild>
                             {filename.endsWith('.pdf') ? (
                                 <SendpdfDialog fileId={sendid} />
                             ) : (
@@ -278,10 +278,11 @@ export function Alltable() {
     const [rowSelection, setRowSelection] = React.useState({})
 
     const { data: recentlySent } = trpc.getSent.useQuery();
+    const stableData = React.useMemo(() => recentlySent || [], [recentlySent]);
 
     console.log(recentlySent);
     const table = useReactTable({
-        data: recentlySent || [],
+        data: stableData || [],
         columns,
         onSortingChange: setSorting,
         onColumnFiltersChange: setColumnFilters,
@@ -291,6 +292,8 @@ export function Alltable() {
         getFilteredRowModel: getFilteredRowModel(),
         onColumnVisibilityChange: setColumnVisibility,
         onRowSelectionChange: setRowSelection,
+        autoResetPageIndex: false,
+        autoResetExpanded: false,
         state: {
             sorting,
             columnFilters,
