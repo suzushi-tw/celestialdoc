@@ -71,7 +71,7 @@ export const EmailTemplate = ({
 }: NetlifyWelcomeEmailProps) => (
   <Html>
     <Head />
-    <Preview>You have a new file ...</Preview>
+    <Preview>{filename}</Preview>
     <Body style={main}>
       <table style={{ margin: '0 auto' }}>
         <tr>
@@ -79,14 +79,21 @@ export const EmailTemplate = ({
             <Container style={container}>
               <Section style={coverSection}>
                 <div style={centeredContent}>
-                  <Section style={imageSection}>
-                    <Img
-                      src={'https://pub-547e64706ac94f28bb62c2bcb0d608db.r2.dev/working.png'}
-                      width="200"
-                      height="200"
-                      alt="banner"
-                    />
-                  </Section>
+                  <table style={{ margin: '0 auto', width: "100%" }}>
+                    <tr>
+                      <td align="center">
+                        <Section style={imageSection}>
+                          <Img
+                            src={'https://pub-547e64706ac94f28bb62c2bcb0d608db.r2.dev/working.png'}
+                            width="200"
+                            height="200"
+                            alt="banner"
+                            style={{ margin: 'auto' }}
+                          />
+                        </Section>
+                      </td>
+                    </tr>
+                  </table>
                   <Section style={upperSection}>
                     <Heading style={h1}>You have a new file ...</Heading>
                     <Text style={mainText}>
@@ -193,6 +200,8 @@ const imageSection = {
   backgroundColor: "#252f3d",
   padding: "20px 0",
   textAlign: 'center' as const,
+  marginLeft: 'auto',
+  marginRight: 'auto',
 };
 
 const coverSection = { backgroundColor: "#fff" };
