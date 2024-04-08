@@ -169,12 +169,17 @@ export const Lastviewed = () => {
                                     ) : (
                                         recentlyViewedFiles?.map((file) => (
                                             <>
-                                                <Link href={`/dashboard/${file.id}`}>
+                                                {/* <Link href={`/dashboard/${file.id}`}> */}
                                                     <TableRow key={file.id}>
-                                                        <TableCell className="font-medium truncate max-w-32">{file.name}</TableCell>
+
+                                                        <TableCell className="font-medium truncate max-w-32">
+                                                            <Link href={`/dashboard/${file.id}`}>{file.name}</Link>
+                                                        
+                                                        </TableCell>
+
                                                         <TableCell className="text-right">{new Date(file.updatedAt).toLocaleDateString()}</TableCell>
                                                     </TableRow>
-                                                </Link>
+                                                {/* </Link> */}
                                             </>
 
 
