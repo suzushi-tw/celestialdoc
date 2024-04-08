@@ -50,6 +50,9 @@ import {
 } from "@/components/ui/select"
 import toast, { Toaster } from 'react-hot-toast';
 import { not } from "drizzle-orm"
+import { SendpdfDialog } from "./Sendpdfdialogue"
+import { SendfileDialog } from "./Sendfiledialogue"
+import { send } from "process"
 
 const notify = () => toast.success('Successfully Updated !');
 const notifydelete = () => toast.success("Deleting !");
@@ -228,8 +231,8 @@ export const columns: ColumnDef<RecentlySent>[] = [
         id: "actions",
         enableHiding: false,
         cell: ({ row }) => {
-            const payment = row.original
             const sendid = String(row.getValue("id"));
+            const filename = String(row.getValue("name"));
             return (
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -249,8 +252,14 @@ export const columns: ColumnDef<RecentlySent>[] = [
                             Delete
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        {/* <DropdownMenuItem>View customer</DropdownMenuItem>
-                        <DropdownMenuItem>View payment details</DropdownMenuItem> */}
+                        <DropdownMenuItem>
+                            {filename.endsWith('.pdf') ? (
+                                <SendpdfDialog fileId={sendid} />
+                            ) : (
+                                <SendfileDialog fileId={sendid} />
+                            )}
+                        </DropdownMenuItem>
+                        {/* <DropdownMenuItem></DropdownMenuItem> */}
                     </DropdownMenuContent>
                 </DropdownMenu>
             )
