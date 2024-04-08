@@ -73,68 +73,74 @@ const EmailTemplate = ({
         <Head />
         <Preview>You have a new file ...</Preview>
         <Body style={main}>
-            <Container style={container}>
-                <Section style={coverSection}>
-                    <Section style={imageSection}>
-                        <Img
-                            src={'https://pub-547e64706ac94f28bb62c2bcb0d608db.r2.dev/working.png'}
-                            width="200"
-                            height="200"
-                            alt="banner"
-                        />
-                    </Section>
-                    <Section style={upperSection}>
-                        <Heading style={h1}>You have a new file ...</Heading>
-                        <Text style={mainText}>
+            <table style={{ margin: '0 auto' }}>
+                <tr>
+                    <td>
+                        <Container style={container}>
+                            <Section style={coverSection}>
+                                <Section style={imageSection}>
+                                    <Img
+                                        src={'https://pub-547e64706ac94f28bb62c2bcb0d608db.r2.dev/working.png'}
+                                        width="200"
+                                        height="200"
+                                        alt="banner"
+                                    />
+                                </Section>
+                                <Section style={upperSection}>
+                                    <Heading style={h1}>You have a new file ...</Heading>
+                                    <Text style={mainText}>
 
-                        </Text>
-                        <Section style={verificationSection}>
-                            <Text style={verifyText}>{filename}</Text>
-                            <Text style={verifyText}>from {senderemail}</Text>
+                                    </Text>
+                                    <Section style={verificationSection}>
+                                        <Text style={verifyText}>{filename}</Text>
+                                        <Text style={verifyText}>from {senderemail}</Text>
 
-                            <table style={{ width: '100%', textAlign: 'center' }}>
-                                <tr>
-                                    <td>
-                                        <Button
-                                            style={{
-                                                backgroundColor: '#10C58E',
-                                                color: 'white',
-                                                borderRadius: '10px',
-                                                padding: '10px 18px',
-                                                textAlign: 'center',
-                                                alignItems: "center",
-                                                justifyContent: "center",
-                                                fontFamily:
-                                                    "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
-                                            }}
-                                            href={viewUrl}
-                                        >
-                                            View the file ...
-                                        </Button>
-                                    </td>
-                                </tr>
-                            </table>
+                                        <table style={{ width: '100%', textAlign: 'center' }}>
+                                            <tr>
+                                                <td>
+                                                    <Button
+                                                        style={{
+                                                            backgroundColor: '#10C58E',
+                                                            color: 'white',
+                                                            borderRadius: '10px',
+                                                            padding: '10px 18px',
+                                                            textAlign: 'center',
+                                                            alignItems: "center",
+                                                            justifyContent: "center",
+                                                            fontFamily:
+                                                                "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+                                                        }}
+                                                        href={viewUrl}
+                                                    >
+                                                        View the file ...
+                                                    </Button>
+                                                </td>
+                                            </tr>
+                                        </table>
 
-                            <Text style={validityText}>
-                                (Please click on the button above to access it ...)
+                                        <Text style={validityText}>
+                                            (Please click on the button above to access it ...)
+                                        </Text>
+                                    </Section>
+                                </Section>
+                                <Hr />
+                                <Section style={lowerSection}>
+                                    <Text style={cautionText}>
+                                        This email and any attachments are intended solely for the use of the individual
+                                        or entity to whom they are addressed and may contain confidential and/or privileged information.
+                                        If you are not the intended recipient, please ignore this email.
+                                        Any unauthorized use, reproduction, or distribution of this email or its contents is strictly prohibited.
+                                        Thank you for your understanding !
+                                    </Text>
+                                </Section>
+                            </Section>
+                            <Text style={footerText}>
+                                Stellar-AI, Frankfurt am Main, Germany
                             </Text>
-                        </Section>
-                    </Section>
-                    <Hr />
-                    <Section style={lowerSection}>
-                        <Text style={cautionText}>
-                        This email and any attachments are intended solely for the use of the individual 
-                        or entity to whom they are addressed and may contain confidential and/or privileged information. 
-                        If you are not the intended recipient, please ignore this email. 
-                        Any unauthorized use, reproduction, or distribution of this email or its contents is strictly prohibited.
-                        Thank you for your understanding !
-                        </Text>
-                    </Section>
-                </Section>
-                <Text style={footerText}>
-                    Stellar-AI, Frankfurt am Main, Germany
-                </Text>
-            </Container>
+                        </Container>
+                    </td>
+                </tr>
+            </table>
         </Body>
     </Html>
 );

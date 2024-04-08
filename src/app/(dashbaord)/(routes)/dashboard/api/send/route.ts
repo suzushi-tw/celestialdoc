@@ -62,7 +62,7 @@ export async function POST(req: Request, res: Response) {
           const data = await resend.emails.send({
             from: sender,
             to: email,
-            subject: 'Welcome to CelestialDOC',
+            subject: 'You have a new file ...',
             react: EmailTemplate({ viewUrl, filename: file.name, senderemail:primaryEmail  }, { steps: [], links: [] }),
           });
 
