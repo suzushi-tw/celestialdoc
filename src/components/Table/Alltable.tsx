@@ -268,7 +268,7 @@ export function Alltable() {
         React.useState<VisibilityState>({ id: false, })
     const [rowSelection, setRowSelection] = React.useState({})
 
-    const { data: recentlySent } = trpc.getRecentSent.useQuery();
+    const { data: recentlySent } = trpc.getSent.useQuery();
 
     console.log(recentlySent);
     const table = useReactTable({

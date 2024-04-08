@@ -58,6 +58,36 @@ export async function Deletesent(sendid: string) {
     });
 }
 
+export async function Deletefavoritefile(sendid: string) {
+    const { userId } = auth();
+    if (!sendid) {
+        throw new Error('fileId is required');
+    }
+    console.log("deleting sent" + sendid);
+    await prisma.file.delete({
+        where: {
+            id: sendid,
+            userId: userId,
+        },
+    });
+}
+
+export async function Deletefavoritealbum(sendid: string) {
+    const { userId } = auth();
+    if (!sendid) {
+        throw new Error('fileId is required');
+    }
+    console.log("deleting sent" + sendid);
+    await prisma.album.delete({
+        where: {
+            id: sendid,
+            userId: userId,
+        },
+    });
+}
+
+
+
 export async function Togglefavoritealbume(fileId: string, favorite: boolean) {
     const { userId } = auth();
     if (!fileId) {

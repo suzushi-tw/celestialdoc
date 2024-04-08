@@ -37,7 +37,7 @@ import {
 } from "@/components/ui/table"
 import { trpc } from '@/app/_trpc/client'
 import { Switch } from "../ui/switch"
-import { changepasswordstate, changedownloadstate, Deletesent } from "@/server/action"
+import { changepasswordstate, changedownloadstate, Deletesent, Deletefavoritefile } from "@/server/action"
 import { useState } from "react"
 import {
     Select,
@@ -50,6 +50,7 @@ import {
 } from "@/components/ui/select"
 import toast, { Toaster } from 'react-hot-toast';
 import { not } from "drizzle-orm"
+import { send } from "process"
 
 const notify = () => toast.success('Successfully Updated !');
 const notifydelete = () => toast.success("Deleting !");
@@ -130,7 +131,8 @@ export const columns: ColumnDef<FavoriteFile>[] = [
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuItem className="text-red-600"
                             onClick={() => {
-                                Deletesent(sendid);
+                                // Deletesent(sendid);
+                                Deletefavoritefile(sendid);
                                 notifydelete();
                             }}
                         >

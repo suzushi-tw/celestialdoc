@@ -248,10 +248,12 @@ const Filesdashboard = () => {
                                                         }}>
                                                         <CardHeader>
                                                             <CardTitle>
+                                                            <div className='flex justify-between items-center'>
                                                                 <h3 className='truncate text-lg font-medium text-zinc-900'>
                                                                     {file.name}
                                                                 </h3>
                                                                 <Filecardaction url={file.url} fileId={file.id} filename={file.name} favorite={file.favorite}/>
+                                                            </div>
                                                             </CardTitle>
 
                                                         </CardHeader>

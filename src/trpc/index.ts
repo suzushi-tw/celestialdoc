@@ -74,6 +74,15 @@ export const appRouter = router({
     });
   }),
 
+  getSent: privateProcedure.query(async({ctx})=>{
+    const {userId}=ctx
+
+    return await prisma.send.findMany({
+      where: {userId: userId},
+      orderBy:{createdAt: 'desc'}
+    })
+  }),
+
   
   getfavoriteafile: privateProcedure.query(async({ctx})=>{
     const {userId}=ctx

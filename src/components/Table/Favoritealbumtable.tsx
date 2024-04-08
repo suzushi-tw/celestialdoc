@@ -37,7 +37,7 @@ import {
 } from "@/components/ui/table"
 import { trpc } from '@/app/_trpc/client'
 import { Switch } from "../ui/switch"
-import { changepasswordstate, changedownloadstate, Deletesent } from "@/server/action"
+import { changepasswordstate, changedownloadstate, Deletesent, Deletefavoritealbum } from "@/server/action"
 import { useState } from "react"
 import {
     Select,
@@ -130,7 +130,8 @@ export const columns: ColumnDef<FavoriteAlbum>[] = [
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuItem className="text-red-600"
                             onClick={() => {
-                                Deletesent(sendid);
+                                // Deletesent(sendid);
+                                Deletefavoritealbum(sendid);
                                 notifydelete();
                             }}
                         >
