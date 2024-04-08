@@ -1,14 +1,11 @@
 import { EmailTemplate } from '@/components/email-template';
 import { Resend } from 'resend';
-import { NextApiRequest, NextApiResponse } from 'next';
 import { absoluteUrl } from '@/lib/utils';
 import { auth } from '@clerk/nextjs';
 import { getAuth, clerkClient } from "@clerk/nextjs/server";
 import prisma from '@/lib/prisma';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-
-export const runtime="edge"
 
 export async function POST(req: Request, res: Response) {
   if (req.method === 'POST') {
