@@ -42,7 +42,7 @@ export const Lastviewed = () => {
                 <div className="flex items-center">
                     <TabsList>
                         <TabsTrigger value="files">Files</TabsTrigger>
-                        <TabsTrigger value="album">Album</TabsTrigger>
+                        <TabsTrigger value="gallery">Gallery</TabsTrigger>
 
                     </TabsList>
                     <div className="ml-auto flex items-center gap-2">
@@ -191,12 +191,12 @@ export const Lastviewed = () => {
                         </CardContent>
                     </Card>
                 </TabsContent>
-                <TabsContent value="album">
+                <TabsContent value="gallery">
                     <Card>
                         <CardHeader className="px-7">
-                            <CardTitle>Album</CardTitle>
+                            <CardTitle>Gallery</CardTitle>
                             <CardDescription>
-                                Recently viewed Album...
+                                Recently viewed photos ...
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
