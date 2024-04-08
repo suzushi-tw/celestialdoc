@@ -191,6 +191,7 @@ const Pptrenderer = ({ url, fileId, filename }: PdfRendererProps) => {
           <Button
             onClick={() => setRotation((prev) => prev - 90)}
             variant='ghost'
+            disabled
             aria-label='rotate 90 degrees'>
             {/* <RotateCw className='h-4 w-4' /> */}
             <RotateCcwSquare className='h-4 w-4' />
@@ -199,6 +200,7 @@ const Pptrenderer = ({ url, fileId, filename }: PdfRendererProps) => {
           <Button
             onClick={() => setRotation((prev) => prev + 90)}
             variant='ghost'
+            disabled
             aria-label='rotate 90 degrees'>
             {/* <RotateCw className='h-4 w-4' /> */}
             <RotateCwSquare className='h-4 w-4' />

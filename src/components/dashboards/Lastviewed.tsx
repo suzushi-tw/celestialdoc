@@ -33,7 +33,7 @@ export const Lastviewed = () => {
 
     const { data: recentlyViewedAlbum } = trpc.getRecentAlbum.useQuery();
 
-    const { data: recentlySent } =trpc.getRecentSent.useQuery();
+    const { data: recentlySent } = trpc.getRecentSent.useQuery();
 
     return (
         <>
@@ -168,10 +168,16 @@ export const Lastviewed = () => {
                                         </TableRow>
                                     ) : (
                                         recentlyViewedFiles?.map((file) => (
-                                            <TableRow key={file.id}>
-                                                <TableCell className="font-medium truncate max-w-32">{file.name}</TableCell>
-                                                <TableCell className="text-right">{new Date(file.updatedAt).toLocaleDateString()}</TableCell>
-                                            </TableRow>
+                                            <>
+                                                <Link href={`/dashboard/${file.id}`}>
+                                                    <TableRow key={file.id}>
+                                                        <TableCell className="font-medium truncate max-w-32">{file.name}</TableCell>
+                                                        <TableCell className="text-right">{new Date(file.updatedAt).toLocaleDateString()}</TableCell>
+                                                    </TableRow>
+                                                </Link>
+                                            </>
+
+
                                         ))
                                     )}
                                 </TableBody>
@@ -205,10 +211,15 @@ export const Lastviewed = () => {
                                         </TableRow>
                                     ) : (
                                         recentlyViewedAlbum?.map((file) => (
-                                            <TableRow key={file.id}>
-                                                <TableCell className="font-medium truncate max-w-32">{file.name}</TableCell>
-                                                <TableCell className="text-right">{new Date(file.updatedAt).toLocaleDateString()}</TableCell>
-                                            </TableRow>
+                                            <>
+                                                <Link href={`/album`}>
+                                                    <TableRow key={file.id}>
+                                                        <TableCell className="font-medium truncate max-w-32">{file.name}</TableCell>
+                                                        <TableCell className="text-right">{new Date(file.updatedAt).toLocaleDateString()}</TableCell>
+                                                    </TableRow>
+                                                </Link>
+                                            </>
+
                                         ))
                                     )}
                                 </TableBody>
