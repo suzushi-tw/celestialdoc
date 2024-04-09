@@ -298,7 +298,7 @@ const Albumdashboard = () => {
                                 ) : isLoading ? (
                                     <Skeleton height={100} className='my-2' count={3} />
                                 ) : (
-                                    <div className='mt-3 flex flex-col items-center gap-2 max-w-xl'>
+                                    <div className='mt-3 flex flex-col items-center gap-2 '>
 
                                         <NextImage alt='work image' width={200} height={200} src={"/working.png"} />
                                         <h3 className='font-semibold text-xl'>
