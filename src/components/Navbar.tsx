@@ -5,6 +5,14 @@ import MaxWidthWrapper from './MaxWidthWrapper'
 import { buttonVariants } from './ui/button'
 import { useUser } from "@clerk/clerk-react";
 import { UserButton } from '@clerk/nextjs';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import MobileNav from './Mobilenav'
 
 const Navbar = () => {
   const { user } = useUser();
@@ -19,20 +27,25 @@ const Navbar = () => {
             <span>CelestialDOC</span>
           </Link>
 
-          {/* <MobileNav isAuth={!!user} /> */}
+          <MobileNav isAuth={!!user} />
 
-          <div className='items-center space-x-4 '>
+          <div className='flex items-center space-x-4 '>
             {user ? (
               <>
 
-                <Link
-                  href='/dashboard'
-                  className={buttonVariants({
-                    variant: 'ghost',
-                    size: 'sm',
-                  })}>
-                  Dashboard
-                </Link>
+                <div className='sm:block hidden'>
+                  <Link
+                    href='/dashboard'
+                    className={buttonVariants({
+                      variant: 'ghost',
+                      size: 'sm',
+
+                    })} >
+                    Dashboard
+                  </Link>
+                </div>
+
+
                 <UserButton />
               </>
 
