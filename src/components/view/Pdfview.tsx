@@ -68,15 +68,15 @@ type File = {
     fileId: string | null;
 };
 const notifydownload = () => toast.success('Downloading files ...', {
-    duration: 5000
+    duration: 2500
 });
 
 const passworderror = () => toast.error('Password error ...', {
-    duration: 5000
+    duration: 2500
 });
 
 const unexpectederror = () => toast.error('There was an error ...', {
-    duration: 5000
+    duration: 2500
 });
 
 const Pdfview = ({ file }: { file: File }) => {

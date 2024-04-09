@@ -34,15 +34,15 @@ type File = {
 };
 
 const notifydownload = () => toast.success('Downloading files ...', {
-    duration: 5000
+    duration: 2500
 });
 
 const passworderror = () => toast.error('Password error ...', {
-    duration: 5000
+    duration: 2500
 });
 
 const unexpectederror = () => toast.error('There was an error ...', {
-    duration: 5000
+    duration: 2500
 });
 
 
@@ -80,8 +80,10 @@ export function Elsethenpdfviewer({ file }: { file: File }) {
             if (response.data.ispasswordcorrect) {
                 setIsPasswordCorrect(true);
                 setPasswordError(false);
+                return ;
                 // Optionally, proceed with the download or any other action
             } else if (!response.data.ispasswordcorrect) {
+                console.log("throwing error toast")
                 setPasswordError(true);
                 passworderror();
             }
