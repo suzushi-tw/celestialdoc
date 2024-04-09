@@ -81,6 +81,7 @@ import { Image, ImageGallery } from '@lobehub/ui';
 import { Filecardaction } from './Filecardaction'
 import { Gallerysvg } from '@/lib/icon'
 import { Albumcardaction } from './Albumcardaction'
+import NextImage from 'next/image'
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 
@@ -186,7 +187,7 @@ const Albumdashboard = () => {
                 <ResizablePanel defaultSize={80}>
                     <div className='mt-3 mx-6 flex flex-col items-start justify-between gap-4 border-b border-gray-200 pb-5 sm:flex-row sm:items-center sm:gap-0'>
                         <h1 className='mb-3 font-bold text-5xl text-gray-900'>
-                         Gallery :
+                            Gallery :
                         </h1>
 
                         {/* <UploadButton isSubscribed={subscriptionPlan.isSubscribed} /> */}
@@ -297,9 +298,9 @@ const Albumdashboard = () => {
                                 ) : isLoading ? (
                                     <Skeleton height={100} className='my-2' count={3} />
                                 ) : (
-                                    <div className='mt-3 flex flex-col items-center gap-2'>
+                                    <div className='mt-3 flex flex-col items-center gap-2 max-w-xl'>
 
-                                        <Image alt='work image' width={200} height={200} src={"/working.png"} />
+                                        <NextImage alt='work image' width={200} height={200} src={"/working.png"} />
                                         <h3 className='font-semibold text-xl'>
                                             Pretty empty around here ...
                                         </h3>
