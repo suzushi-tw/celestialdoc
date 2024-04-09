@@ -17,7 +17,7 @@ CelestialDOC is an open source Google drive or Docsend alternative to store your
 Set Up .env:
 
 ```bash
-//baseurl
+//baseurl http://localhost:3000 or your domain
 NEXT_PUBLIC_BASE_URL=
 
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
@@ -83,9 +83,12 @@ AWS_SES_REGION=
 ## Deployment
 
 The easiest way to deploy is 
-- Vercel
+
+- [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsuzushi-tw%2Fcelestialdoc&repository-name=celestialdoc-fork&demo-title=CelestialDOC&demo-description=Open%20source%20google%20drive%20%2F%20docsend%20alternative%20&demo-url=https%3A%2F%2Fcelestialdoc.com%2F&demo-image=https%3A%2F%2Fgithub.com%2Fsuzushi-tw%2Fcelestialdoc%2Fblob%2Fmain%2Fpublic%2FDemo.png)
+
+- [![Deploy to DigitalOcean](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/suzushi-tw/celestialdoc/tree/main&refcode=11745b6395ca)
+
 - Cloudflare Pages (add Edge run time)
-- Digital Ocean
 
 
 ##  Artwork

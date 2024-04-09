@@ -16,13 +16,6 @@ async function getSignedUploadUrl(file_key: string, file_type: string) {
 export async function uploadToS3(file: File): Promise<{ file_key: string; file_name: string }> {
     return new Promise(async (resolve, reject) => {
         try {
-            const s3 = new S3({
-                region: process.env.NEXT_PUBLIC_S3_UPLOAD_REGION,
-                credentials: {
-                    accessKeyId: process.env.NEXT_PUBLIC_S3_ACCESS_KEY_ID!,
-                    secretAccessKey: process.env.NEXT_PUBLIC_S3_SECRET_ACCESS_KEY!,
-                },
-            });
 
             // Assuming file.type is correctly set for DOC and DOCX files
             let extension = '';
