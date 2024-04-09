@@ -39,7 +39,7 @@ const Navbar = () => {
 
             ) : (
               <Link
-                href='/dashboard'
+                href='/Authcallback'
                 className={buttonVariants({
                   variant: 'ghost',
                   size: 'sm',

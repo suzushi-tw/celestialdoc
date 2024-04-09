@@ -72,38 +72,12 @@ import { Skeleton } from './ui/skeleton'
 
 const Dashboard = () => {
 
-    const router = useRouter();
-    const searchParams = useSearchParams();
-    const origin = searchParams.get('origin');
 
-    const retry = useRef(0);
-    const maxRetryCount = 5;
     const { data, error, isLoading } = trpc.filescount.useQuery();
     const formattedData = data
         ?.map(item => ({ name: item.type, value: item.count }))
         .filter(item => item.value !== 0) || [];
-    const { refetch } = trpc.authCallback.useQuery(undefined, {
-        onSuccess: ({ success }) => {
-            if (success) {
-                router.push(origin ? `/${origin}` : "/dashboard");
-            }
-        },
-        onError: (err) => {
-            console.log(err);
-            if (err.data?.code === "UNAUTHORIZED") {
-                retry.current = retry.current + 1;
-                if (retry.current <= maxRetryCount) {
-                    setTimeout(() => {
-                        refetch();
-                    }, 500);
-                } else {
-                    router.push("/sign-in");
-                }
-            }
-        },
-        retry: false,
-        retryDelay: 500,
-    });
+
 
     const [isCollapsed, setIsCollapsed] = React.useState(false)
 
