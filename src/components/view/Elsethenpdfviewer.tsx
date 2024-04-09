@@ -41,6 +41,11 @@ const passworderror = () => toast.error('Password error ...', {
     duration: 5000
 });
 
+const unexpectederror = () => toast.error('There was an error ...', {
+    duration: 5000
+});
+
+
 export function Elsethenpdfviewer({ file }: { file: File }) {
 
     const [enteredPassword, setEnteredPassword] = useState('');
@@ -76,14 +81,14 @@ export function Elsethenpdfviewer({ file }: { file: File }) {
                 setIsPasswordCorrect(true);
                 setPasswordError(false);
                 // Optionally, proceed with the download or any other action
-            } else {
+            } else if (!response.data.ispasswordcorrect) {
                 setPasswordError(true);
                 passworderror();
             }
         } catch (error) {
             console.error('Password verification failed:', error);
             setPasswordError(true);
-            passworderror();
+           unexpectederror();
         } finally {
             setIsSubmitting(false);
         }
@@ -147,7 +152,7 @@ export function Elsethenpdfviewer({ file }: { file: File }) {
                                 <Input id="password" type="password" required value={enteredPassword} onChange={handlePasswordChange} />
                                 {passwordError && <p style={{ transition: 'opacity 0.5s' }} className="text-red-600">Password is incorrect</p>}
                                 <Button type="submit" className="w-full">
-                                {isSubmitting ? <Fileloadingsvg /> : 'Submit Password'}
+                                    {isSubmitting ? <Fileloadingsvg /> : 'Submit Password'}
                                 </Button>
                             </form>
                         ) : (

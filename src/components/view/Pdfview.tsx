@@ -75,6 +75,10 @@ const passworderror = () => toast.error('Password error ...', {
     duration: 5000
 });
 
+const unexpectederror = () => toast.error('There was an error ...', {
+    duration: 5000
+});
+
 const Pdfview = ({ file }: { file: File }) => {
     const { toast } = useToast()
     const [numPages, setNumPages] = useState<number>()
@@ -173,14 +177,14 @@ const Pdfview = ({ file }: { file: File }) => {
                 setPasswordError(false);
                 sessionStorage.setItem('isPasswordCorrect', JSON.stringify(true)); // Save to localStorage
                 // Optionally, proceed with the download or any other action
-            } else {
+            } else if (!response.data.ispasswordcorrect) {
                 setPasswordError(true);
                 passworderror();
             }
         } catch (error) {
             console.error('Password verification failed:', error);
             setPasswordError(true);
-            passworderror();
+            unexpectederror();
         } finally {
             setIsSubmitting(false);
         }
@@ -220,7 +224,7 @@ const Pdfview = ({ file }: { file: File }) => {
                                 <Input id="password" type="password" required value={enteredPassword} onChange={handlePasswordChange} />
                                 {passwordError && <p style={{ transition: 'opacity 0.5s' }} className="text-red-600">Password is incorrect</p>}
                                 <Button type="submit" className="w-full">
-                                {isSubmitting ? <Fileloadingsvg /> : 'Submit Password'}
+                                    {isSubmitting ? <Fileloadingsvg /> : 'Submit Password'}
                                 </Button>
                             </form>
                         </div>
