@@ -49,12 +49,26 @@ export function Elsethenpdfviewer({ file }: { file: File }) {
         setEnteredPassword(event.target.value);
     };
 
-    const handlePasswordCheck = (event: React.FormEvent) => {
+    const handlePasswordCheck =async (event: React.FormEvent) => {
         event.preventDefault();
-        if (file.hasPassword && file.password === enteredPassword) {
-            setIsPasswordCorrect(true);
-            setPasswordError(false);
-        } else {
+        try {
+            console.log("fetching hashed")
+            // Make an API call to your server to verify the password
+            const response = await axios.post('/view/api/hashed', {
+                enteredPassword: enteredPassword,
+                fileId: file.id, // Assuming you need the file ID to identify the correct hash to compare against
+            });
+
+            if (response.data.ispasswordcorrect) {
+                setIsPasswordCorrect(true);
+                setPasswordError(false);
+                // Optionally, proceed with the download or any other action
+            } else {
+                setPasswordError(true);
+                passworderror();
+            }
+        } catch (error) {
+            console.error('Password verification failed:', error);
             setPasswordError(true);
             passworderror();
         }

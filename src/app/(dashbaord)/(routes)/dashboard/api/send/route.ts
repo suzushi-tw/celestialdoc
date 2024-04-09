@@ -7,6 +7,7 @@ import prisma from '@/lib/prisma';
 import { render } from '@react-email/render';
 import { SES } from '@aws-sdk/client-ses';
 import { Sesemailtemplate } from '@/components/Ses-email-template';
+import bcrypt from 'bcrypt';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -32,9 +33,11 @@ export async function POST(req: Request, res: Response) {
 
     if (!isPasswordVisible) {
       password = 'none'
+    } else {
+      // Hash the password if it's visible
+      const saltRounds = 10; // You can adjust the salt rounds for more security
+      password = await bcrypt.hash(password, saltRounds);
     }
-
-
 
 
 
