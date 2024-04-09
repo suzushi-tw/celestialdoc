@@ -69,6 +69,7 @@ import { toast } from '../ui/use-toast'
 import { latestviewedfile } from '@/server/action'
 import { PPTsvg, Wordsvg } from '@/lib/icon'
 import { Filecardaction } from './Filecardaction'
+import Image from 'next/image'
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 
@@ -248,12 +249,12 @@ const Filesdashboard = () => {
                                                         }}>
                                                         <CardHeader>
                                                             <CardTitle>
-                                                            <div className='flex justify-between items-center'>
-                                                                <h3 className='truncate text-lg font-medium text-zinc-900'>
-                                                                    {file.name}
-                                                                </h3>
-                                                                <Filecardaction url={file.url} fileId={file.id} filename={file.name} favorite={file.favorite}/>
-                                                            </div>
+                                                                <div className='flex justify-between items-center'>
+                                                                    <h3 className='truncate text-lg font-medium text-zinc-900'>
+                                                                        {file.name}
+                                                                    </h3>
+                                                                    <Filecardaction url={file.url} fileId={file.id} filename={file.name} favorite={file.favorite} />
+                                                                </div>
                                                             </CardTitle>
 
                                                         </CardHeader>
@@ -341,12 +342,20 @@ const Filesdashboard = () => {
                             ) : isLoading ? (
                                 <Skeleton height={100} className='my-2' count={3} />
                             ) : (
-                                <div className='mt-16 flex flex-col items-center gap-2'>
-                                    <Ghost className='h-8 w-8 text-zinc-800' />
+                                // <div className='mt-16 flex flex-col items-center gap-2'>
+                                //     <Ghost className='h-8 w-8 text-zinc-800' />
+                                //     <h3 className='font-semibold text-xl'>
+                                //         Pretty empty around here
+                                //     </h3>
+                                //     <p>Let&apos;s upload your first PDF.</p>
+                                // </div>
+                                <div className='mt-3 flex flex-col items-center gap-2'>
+
+                                    <Image alt='work image' width={200} height={200} src={"/working.png"} />
                                     <h3 className='font-semibold text-xl'>
-                                        Pretty empty around here
+                                        Pretty empty around here ...
                                     </h3>
-                                    <p>Let&apos;s upload your first PDF.</p>
+                                    <p>Upload your first file </p>
                                 </div>
                             )
                         }

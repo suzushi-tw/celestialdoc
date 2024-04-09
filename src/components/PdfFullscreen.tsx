@@ -65,7 +65,7 @@ const PdfFullscreen = ({ fileUrl }: PdfFullscreenProps) => {
               }
               file={fileUrl}
               className='max-h-full'>
-              <ScrollArea className='h-1/2'>
+              <ScrollArea className='h-[calc(100vh-10rem)]'>
                 {new Array(numPages).fill(0).map((_, i) => (
                   <Page
                     key={i}

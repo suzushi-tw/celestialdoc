@@ -186,7 +186,7 @@ const Albumdashboard = () => {
                 <ResizablePanel defaultSize={80}>
                     <div className='mt-3 mx-6 flex flex-col items-start justify-between gap-4 border-b border-gray-200 pb-5 sm:flex-row sm:items-center sm:gap-0'>
                         <h1 className='mb-3 font-bold text-5xl text-gray-900'>
-                            My Files:
+                         Gallery :
                         </h1>
 
                         {/* <UploadButton isSubscribed={subscriptionPlan.isSubscribed} /> */}
@@ -219,7 +219,7 @@ const Albumdashboard = () => {
                                                                     <h3 className='truncate text-lg font-medium text-zinc-900 '>
                                                                         {file.name}
                                                                     </h3>
-                                                                    <Albumcardaction url={file.url} fileId={file.id} filename={file.name} favorite={file.favorite}/>
+                                                                    <Albumcardaction url={file.url} fileId={file.id} filename={file.name} favorite={file.favorite} />
                                                                     {/* <Filecardaction url={file.url} fileId={file.id} filename={file.name} favorite={file.favorite}/> */}
                                                                 </div>
                                                             </CardTitle>
@@ -297,12 +297,13 @@ const Albumdashboard = () => {
                                 ) : isLoading ? (
                                     <Skeleton height={100} className='my-2' count={3} />
                                 ) : (
-                                    <div className='mt-16 flex flex-col items-center gap-2'>
-                                        <Ghost className='h-8 w-8 text-zinc-800' />
+                                    <div className='mt-3 flex flex-col items-center gap-2'>
+
+                                        <Image alt='work image' width={200} height={200} src={"/working.png"} />
                                         <h3 className='font-semibold text-xl'>
-                                            Pretty empty around here
+                                            Pretty empty around here ...
                                         </h3>
-                                        <p>Let&apos;s upload your first file.</p>
+                                        <p>Upload your first file </p>
                                     </div>
                                 )
                             }

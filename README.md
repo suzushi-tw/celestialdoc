@@ -6,6 +6,11 @@
 
 CelestialDOC is an open source Google drive or Docsend alternative to store your files and easily share it with others with advanced Link Control. 
 
+- Supports displaying PDF and most office documents
+- Image Gallery
+- Sharing files through email and removing access via link control
+
+
 ## Getting Started
 
 Set Up .env:
@@ -42,10 +47,9 @@ S3_UPLOAD_KEY=
 - Prisma with Postgres, a drizzle schema will be provided soon (WIP)
 - Shdcn UI
 - AWS S3 for documents
+- Cloudflare R2 for album for optimized bandwidth 
 - Clerk Auth
 - Resend / AWS SES in the future (WIP)
-- Cloudflare R2 for album for optimized bandwidth (WIP)
-
 
 
 ## Deployment
