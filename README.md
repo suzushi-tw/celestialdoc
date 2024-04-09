@@ -9,6 +9,7 @@ CelestialDOC is an open source Google drive or Docsend alternative to store your
 - Supports displaying PDF and most office documents
 - Image Gallery
 - Sharing files through email and removing access via link control
+- Configure password and download control (download control only applies to PDF)
 
 
 ## Getting Started
@@ -39,6 +40,33 @@ S3_UPLOAD_SECRET=
 S3_UPLOAD_KEY=
 
 ```
+
+## Optional
+
+By default all files are stored on s3, but for image, if an R2_S3_ENDPOINT and
+R2 bucket credentials are present, it will fetch that presigned url so you can
+upload to R2 bucket
+
+In order to user R2, you need to configure domain dns on cloudflare.
+(Recommanded: set up a subdomain on cloudflare and point it to the R2 bucket)
+
+```bash
+R2_S3_ENDPOINT=
+R2_ACCESS_KEY_ID=
+R2_SECRET_ACCESS_KEY=
+R2_BUCKET=
+R2_URL=
+```
+
+AWS SES: recommanded outside of US
+Sometimes Resend is a bit slow outside of US, so if you wish to use SES you can 
+do so, give the SES access to the same S3 key/secret IAM role so you don't need 
+to set up another pair of key. 
+
+```bash
+AWS_SES_REGION=
+```
+
 
 
 ## Stack
