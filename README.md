@@ -84,7 +84,7 @@ AWS_SES_REGION=
 
 The easiest way to deploy is 
 
-- [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsuzushi-tw%2Fcelestialdoc&repository-name=celestialdoc-fork&demo-title=CelestialDOC&demo-description=Open%20source%20google%20drive%20%2F%20docsend%20alternative%20&demo-url=https%3A%2F%2Fcelestialdoc.com%2F&demo-image=https%3A%2F%2Fgithub.com%2Fsuzushi-tw%2Fcelestialdoc%2Fblob%2Fmain%2Fpublic%2FDemo.png)
+- [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsuzushi-tw%2Fcelestialdoc&repository-name=celestialdoc-fork&demo-title=CelestialDOC&demo-description=Open%20source%20google%20drive%20%2F%20docsend%20alternative%20&demo-url=https%3A%2F%2Fcelestialdoc.com%2F&demo-image=https%3A%2F%2Fpub-547e64706ac94f28bb62c2bcb0d608db.r2.dev%2FDemo.png)
 
 - [![Deploy to DigitalOcean](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/suzushi-tw/celestialdoc/tree/main&refcode=11745b6395ca)
 
