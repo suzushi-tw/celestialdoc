@@ -52,7 +52,7 @@ const Navbar = () => {
 
             ) : (
               <Link
-                href='/Authcallback'
+                href='/sign-up'
                 className={buttonVariants({
                   variant: 'ghost',
                   size: 'sm',
