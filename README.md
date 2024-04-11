@@ -11,6 +11,10 @@ CelestialDOC is an open source Google drive or Docsend alternative to store your
 - Sharing files through email and removing access via link control
 - Configure password and download control (download control only applies to PDF)
 
+## Todo
+
+Add support for sharing photos, if there is a feature you would like, you can head to discussion. 
+
 
 ## Getting Started
 
@@ -73,7 +77,7 @@ AWS_SES_REGION=
 
 - Nextjs
 - Prisma with Postgres, a drizzle schema will be provided soon (WIP)
-- Shdcn UI
+- Shadcn UI
 - AWS S3 for documents
 - Cloudflare R2 for album for optimized bandwidth 
 - Clerk Auth
