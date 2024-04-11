@@ -17,18 +17,24 @@ const AuthCallback = () => {
     const { refetch } = trpc.authCallback.useQuery(undefined, {
         onSuccess: ({ success }) => {
             if (success) {
-                router.push("/dashboard");
+                router.push(origin ? `/${origin}` : "/dashboard");
             }
         },
         onError: (err) => {
             console.log(err);
             if (err.data?.code === "UNAUTHORIZED") {
                 retry.current = retry.current + 1;
-                if (retry.current < maxRetryCount) {
-                    refetch();
+                if (retry.current <= maxRetryCount) {
+                    setTimeout(() => {
+                        refetch();
+                    }, 500);
+                } else {
+                    router.push("/sign-in");
                 }
             }
         },
+        retry: false,
+        retryDelay: 500,
     });
 
     return (
