@@ -77,7 +77,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { Image, ImageGallery } from '@lobehub/ui';
+import { Image, ImageGallery, Video } from '@lobehub/ui';
 import { Filecardaction } from './Filecardaction'
 import { Gallerysvg } from '@/lib/icon'
 import { Albumcardaction } from './Albumcardaction'
@@ -228,7 +228,14 @@ const Albumdashboard = () => {
                                                         </CardHeader>
                                                         <CardContent>
                                                             <div className=' flex items-center justify-center overflow-hidden h-[200px]'>
-                                                                <Image alt={file.name} width="200" height="100" src={file.url} />
+                                                                {
+                                                                    file.name.endsWith('.mp4') ? (
+                                                                     
+                                                                        <Video src={file.url} width={200} height={100}/>
+                                                                    ) : (
+                                                                        <Image alt={file.name} width="200" height="100" src={file.url} />
+                                                                    )
+                                                                }
 
                                                             </div>
                                                             {/* <Dialog>
