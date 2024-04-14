@@ -1,5 +1,15 @@
-
-
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta property="og:title" content="CelestialDOC" />
+    <meta property="og:description" content="An open source Google drive or Docsend alternative to store your files and easily share it with others with advanced Link Control." />
+    <meta property="og:image" content="https://github.com/suzushi-tw/celestialdoc/blob/main/public/Demo.png" />
+    <meta property="og:url" content="https://github.com/suzushi-tw/celestialdoc" />
+</head>
+<body>
+    <!-- You can add a simple message or redirect here -->
+</body>
+</html>
 <img src="./public/Demo.png" alt="CelestialDOC dashboard" />
 
 ## CelestialDOC
