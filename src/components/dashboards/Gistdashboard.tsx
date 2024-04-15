@@ -37,7 +37,10 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import toast, { Toaster } from 'react-hot-toast';
+import { Creategist } from "../creategist";
 
+const updatelanguage = () => toast.success('Updated !');
 
 const Gistdashboard = () => {
 
@@ -80,14 +83,17 @@ const Gistdashboard = () => {
     }, [text]);
 
     const [language, setLanguage] = useState('ts'); // 預設語言為 python
+    const [filename, setFilename] = useState('');
 
     const handlesyntax = (selectedLanguage: string) => {
+        updatelanguage();
         setLanguage(selectedLanguage);
     }
     return (
         <>
 
             <div className="max-h-[calc(100vh-3.5rem)]">
+                <Toaster />
                 <div
                     className="absolute inset-0 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)] z-[-1]"
                 ></div>
@@ -159,7 +165,7 @@ const Gistdashboard = () => {
                                     <Textarea placeholder="Type your message here." id="message" /> */}
                                     </CardContent>
                                     <CardFooter className="flex justify-between">
-                                        <Input type="filename" placeholder="Filename..." className="w-1/2" />
+                                        <Input type="filename" placeholder="Filename..." className="w-1/2" value={filename} onChange={(e) => setFilename(e.target.value)}/>
                                         <Select onValueChange={(value) => handlesyntax(value)}>
                                             <SelectTrigger className="w-[180px]">
                                                 <SelectValue placeholder="Select a language" />
@@ -173,7 +179,8 @@ const Gistdashboard = () => {
                                                 </SelectGroup>
                                             </SelectContent>
                                         </Select>
-                                        <Button>Save changes</Button>
+                                        {/* <Button>Save changes</Button> */}
+                                        <Creategist filename={filename}/>
                                     </CardFooter>
 
                                 </Card>
@@ -193,7 +200,7 @@ const Gistdashboard = () => {
                                         </div>
                                     </CardContent>
                                     <CardFooter className="flex justify-between">
-                                        <Input type="filename" placeholder="Filename..." className="w-1/2" />
+                                        <Input type="filename" placeholder="Filename..." className="w-1/2" value={filename} onChange={(e) => setFilename(e.target.value)}/>
                                         <Select onValueChange={(value) => handlesyntax(value)}>
                                             <SelectTrigger className="w-[180px]">
                                                 <SelectValue placeholder="Select a language" />
@@ -207,7 +214,8 @@ const Gistdashboard = () => {
                                                 </SelectGroup>
                                             </SelectContent>
                                         </Select>
-                                        <Button>Save changes</Button>
+                                        {/* <Button>Save changes</Button> */}
+                                        <Creategist filename={filename}/>
                                     </CardFooter>
 
                                 </Card>
