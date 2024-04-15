@@ -32,6 +32,14 @@ const Navbar = () => {
           <div className='flex items-center space-x-4 '>
             {user ? (
               <>
+                <Link
+                  href='/gist'
+                  className={buttonVariants({
+                    variant: 'ghost',
+                    size: 'sm',
+                  })}>
+                  Gist
+                </Link>
 
                 <div className='sm:block hidden'>
                   <Link
@@ -51,14 +59,25 @@ const Navbar = () => {
 
 
             ) : (
-              <Link
-                href='/sign-up'
-                className={buttonVariants({
-                  variant: 'ghost',
-                  size: 'sm',
-                })}>
-                Get Started
-              </Link>
+              <>
+                <Link
+                  href='/gist'
+                  className={buttonVariants({
+                    variant: 'ghost',
+                    size: 'sm',
+                  })}>
+                  Gist
+                </Link>
+                <Link
+                  href='/sign-up'
+                  className={buttonVariants({
+                    variant: 'ghost',
+                    size: 'sm',
+                  })}>
+                  Get Started
+                </Link>
+              </>
+
             )}
 
           </div>
