@@ -18,6 +18,7 @@ import { Switch } from "./ui/switch"
 import { useState } from "react"
 import axios from "axios"
 import toast, { Toaster } from 'react-hot-toast';
+import { Fileloadingsvg } from "@/lib/icon"
 
 interface SendProps {
     filename: string
@@ -25,7 +26,7 @@ interface SendProps {
     text: string
 }
 
-const notify = () => toast.success('File Sent !');
+const notify = () => toast.success('Creating gist !');
 
 export function Creategist({ filename, language, text }: SendProps) {
 
@@ -35,13 +36,15 @@ export function Creategist({ filename, language, text }: SendProps) {
     const [password, setPassword] = useState('')
     const [isDownloadEnabled, setDownloadEnabled] = useState(false)
     const [email, setEmail] = useState('')
+    const [loading, setIsLoading]=useState(false)
     const [gistUrl, setGistUrl] = useState(process.env.NEXT_PUBLIC_BASE_URL)
 
     const handleSubmit = async () => {
 
         notify();
+        setIsLoading(true)
         try {
-            const response = await axios.post('api/creategist', {
+            const response = await axios.post('gist/api/creategist', {
 
                 filename,
                 language,
@@ -54,8 +57,20 @@ export function Creategist({ filename, language, text }: SendProps) {
             // handle response here
         } catch (error) {
             // handle error here
+        } finally {
+            setIsLoading(false)
         }
     }
+
+    const handleCopy = async () => {
+        try {
+            await navigator.clipboard.writeText(gistUrl || "");
+            toast.success('URL copied to clipboard!');
+        } catch (error) {
+            toast.error('Failed to copy URL');
+        }
+    }
+
 
     return (
         <Dialog>
@@ -82,7 +97,7 @@ export function Creategist({ filename, language, text }: SendProps) {
                             readOnly
                         />
                     </div>
-                    <Button type="submit" size="sm" className="px-3">
+                    <Button type="submit" size="sm" className="px-3" onClick={handleCopy}>
                         <span className="sr-only">Copy</span>
                         <Copy className="h-4 w-4" />
                     </Button>
@@ -90,9 +105,9 @@ export function Creategist({ filename, language, text }: SendProps) {
 
 
                 <DialogFooter>
-                    <DialogClose>
-                        <Button onClick={handleSubmit}>Create</Button>
-                    </DialogClose>
+                    {/* <DialogClose> */}
+                        <Button onClick={handleSubmit}> {loading ? <Fileloadingsvg /> : 'Create'}</Button>
+                    {/* </DialogClose> */}
 
                 </DialogFooter>
             </DialogContent>

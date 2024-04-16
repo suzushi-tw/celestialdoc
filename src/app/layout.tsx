@@ -8,6 +8,7 @@ import Providers from "@/components/Providers";
 import { GeistSans } from "geist/font/sans";
 import Head from 'next/head';
 const inter = Inter({ subsets: ["latin"] });
+import toast, { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: "CelestialDOC",
@@ -29,6 +30,7 @@ export default function RootLayout({
             <meta property="og:image" content={`${process.env.NEXT_PUBLIC_BASE_URL}/Demo.png`} />
           </Head>
           <body className={inter.className} >
+            <Toaster />
             <Navbar />
             {/* <Header /> */}
             {children}
