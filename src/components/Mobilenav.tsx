@@ -37,6 +37,17 @@ const MobileNav = ({ isAuth }: { isAuth: boolean }) => {
                                 <li>
                                     <Link
                                         onClick={() =>
+                                            closeOnCurrent('/gist')
+                                        }
+                                        className='flex items-center w-full font-semibold text-green-600'
+                                        href='/sign-up'>
+                                        Gist
+                                        <ArrowRight className='ml-2 h-5 w-5' />
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        onClick={() =>
                                             closeOnCurrent('/Authcallback')
                                         }
                                         className='flex items-center w-full font-semibold text-green-600'
@@ -45,7 +56,7 @@ const MobileNav = ({ isAuth }: { isAuth: boolean }) => {
                                         <ArrowRight className='ml-2 h-5 w-5' />
                                     </Link>
                                 </li>
-                           
+
                             </>
                         ) : (
                             <>
@@ -57,6 +68,16 @@ const MobileNav = ({ isAuth }: { isAuth: boolean }) => {
                                         className='flex items-center w-full font-semibold'
                                         href='/dashboard'>
                                         Dashboard
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        onClick={() =>
+                                            closeOnCurrent('/gist')
+                                        }
+                                        className='flex items-center w-full font-semibold'
+                                        href='/gist'>
+                                        Gist
                                     </Link>
                                 </li>
 
