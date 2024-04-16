@@ -29,7 +29,7 @@ const Navbar = () => {
 
           <MobileNav isAuth={!!user} />
 
-          <div className=' items-center space-x-4 sm:block hidden'>
+          <div className='hidden sm:flex items-center space-x-4 '>
             {user ? (
               <>
                 <Link
