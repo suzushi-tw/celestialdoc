@@ -54,6 +54,14 @@ model Album {
   userId    String?
 }
 
+model Gist {
+  id   String @id @default(cuid())
+  name String
+  language String
+  text String
+  createdAt DateTime @default(now())
+}
+
 
 model Send {
   id                String  @id @default(cuid())

@@ -21,11 +21,13 @@ import toast, { Toaster } from 'react-hot-toast';
 
 interface SendProps {
     filename: string
+    language: string
+    text: string
 }
 
 const notify = () => toast.success('File Sent !');
 
-export function Creategist({ filename }: SendProps) {
+export function Creategist({ filename, language, text }: SendProps) {
 
 
     const [isPasswordVisible, setPasswordVisible] = useState(false)
@@ -33,6 +35,7 @@ export function Creategist({ filename }: SendProps) {
     const [password, setPassword] = useState('')
     const [isDownloadEnabled, setDownloadEnabled] = useState(false)
     const [email, setEmail] = useState('')
+    const [gistUrl, setGistUrl] = useState(process.env.NEXT_PUBLIC_BASE_URL)
 
     const handleSubmit = async () => {
 
@@ -40,8 +43,13 @@ export function Creategist({ filename }: SendProps) {
         try {
             const response = await axios.post('api/creategist', {
 
-                filename
+                filename,
+                language,
+                text
             })
+            if (response.data.success) {
+                setGistUrl(response.data.url)
+            }
 
             // handle response here
         } catch (error) {
@@ -70,7 +78,7 @@ export function Creategist({ filename }: SendProps) {
                         </Label>
                         <Input
                             id="link"
-                            defaultValue="https://ui.shadcn.com/docs/installation"
+                            value={gistUrl}
                             readOnly
                         />
                     </div>
@@ -83,7 +91,7 @@ export function Creategist({ filename }: SendProps) {
 
                 <DialogFooter>
                     <DialogClose>
-                        <Button onClick={handleSubmit}>Send</Button>
+                        <Button onClick={handleSubmit}>Create</Button>
                     </DialogClose>
 
                 </DialogFooter>

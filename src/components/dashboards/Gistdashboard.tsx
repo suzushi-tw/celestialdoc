@@ -165,7 +165,7 @@ const Gistdashboard = () => {
                                     <Textarea placeholder="Type your message here." id="message" /> */}
                                     </CardContent>
                                     <CardFooter className="flex justify-between">
-                                        <Input type="filename" placeholder="Filename..." className="w-1/2" value={filename} onChange={(e) => setFilename(e.target.value)}/>
+                                        <Input type="filename" placeholder="Filename..." className="w-1/2" value={filename} onChange={(e) => setFilename(e.target.value)} />
                                         <Select onValueChange={(value) => handlesyntax(value)}>
                                             <SelectTrigger className="w-[180px]">
                                                 <SelectValue placeholder="Select a language" />
@@ -180,7 +180,7 @@ const Gistdashboard = () => {
                                             </SelectContent>
                                         </Select>
                                         {/* <Button>Save changes</Button> */}
-                                        <Creategist filename={filename}/>
+                                        <Creategist filename={filename} language={language} text={text}/>
                                     </CardFooter>
 
                                 </Card>
@@ -193,14 +193,14 @@ const Gistdashboard = () => {
                                             <Label htmlFor="message">Preview</Label>
                                             {/* <StoryBook levaStore={store}> */}
                                             <ScrollArea className="h-[calc(100vh-3.5rem-25rem)]">
-                                                {text ? <Markdown >{`\`\`\`${language}\n${text}\n\`\`\``}</Markdown> : <p>No text to preview</p>}
+                                                {text ? <Markdown >{`\`\`\`${language}\n${text}\n\`\`\``}</Markdown> : <p className="text-center justify-center">No text to preview</p>}
                                             </ScrollArea>
 
                                             {/* </StoryBook> */}
                                         </div>
                                     </CardContent>
                                     <CardFooter className="flex justify-between">
-                                        <Input type="filename" placeholder="Filename..." className="w-1/2" value={filename} onChange={(e) => setFilename(e.target.value)}/>
+                                        <Input type="filename" placeholder="Filename..." className="w-1/2" value={filename} onChange={(e) => setFilename(e.target.value)} />
                                         <Select onValueChange={(value) => handlesyntax(value)}>
                                             <SelectTrigger className="w-[180px]">
                                                 <SelectValue placeholder="Select a language" />
@@ -215,7 +215,7 @@ const Gistdashboard = () => {
                                             </SelectContent>
                                         </Select>
                                         {/* <Button>Save changes</Button> */}
-                                        <Creategist filename={filename}/>
+                                        <Creategist filename={filename} language={language} text={text}/>
                                     </CardFooter>
 
                                 </Card>
